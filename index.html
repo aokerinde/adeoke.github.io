@@ -1,214 +1,594 @@
----
-layout: default
-title: "Ade Okerinde | Product Manager Portfolio"
-description: "Product Manager portfolio showcasing AI-enabled process optimization, healthcare and insurance domain expertise, analytics, and product delivery outcomes."
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ade Okerinde | Product Manager | AI Product Owner | Pricing & Insurtech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0F1923;
+  --ink-soft: #3D4F5C;
+  --ink-muted: #7A8FA0;
+  --bg: #F5F2ED;
+  --bg-card: #FDFCF9;
+  --accent: #1B6B93;
+  --accent-warm: #C4622D;
+  --accent-light: #E8F3F9;
+  --border: #DDD8D0;
+  --tag-bg: #EAE6DE;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
 
-<section class="hero" id="top">
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {font-family: var(--sans);background: var(--bg);color: var(--ink);font-size: 16px;line-height: 1.6;overflow-x: hidden;}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {content: '';position: fixed;inset: 0;background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events: none;z-index: 0;opacity: 0.4;}
+
+/* ── NAVIGATION ── */
+nav {position: fixed;top: 0; left: 0; right: 0;z-index: 100;padding: 1.1rem 2.5rem;display: flex;justify-content: space-between;align-items: center;background: rgba(245,242,237,0.88);backdrop-filter: blur(12px);border-bottom: 1px solid var(--border);}
+
+.nav-logo {font-family: var(--serif);font-size: 1.2rem;color: var(--ink);text-decoration: none;letter-spacing: -0.01em;}
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {font-size: 0.85rem;font-weight: 500;color: var(--ink-soft);text-decoration: none;letter-spacing: 0.04em;text-transform: uppercase;transition: color 0.2s;}
+.nav-links a:hover { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {min-height: 100vh;display: grid;grid-template-columns: 1fr 1fr;position: relative;padding-top: 72px;}
+
+.hero-left {padding: 5rem 3rem 4rem 4rem;display: flex;flex-direction: column;justify-content: center;position: relative;z-index: 1;}
+
+.hero-eyebrow {font-family: var(--mono);font-size: 0.78rem;color: var(--accent);letter-spacing: 0.12em;text-transform: uppercase;margin-bottom: 1.5rem;display: flex;align-items: center;gap: 0.75rem;}
+.hero-eyebrow::before {content: '';display: block;width: 32px;height: 1px;background: var(--accent);}
+
+.hero-name {font-family: var(--serif);font-size: clamp(3rem, 5vw, 4.5rem);line-height: 1.05;letter-spacing: -0.02em;color: var(--ink);margin-bottom: 0.5rem;}
+
+.hero-name em {font-style: italic;color: var(--accent);}
+
+.hero-title {font-size: 1.05rem;color: var(--ink-soft);font-weight: 400;margin-bottom: 2rem;max-width: 440px;line-height: 1.5;}
+
+.hero-metrics {display: grid;grid-template-columns: repeat(2, 1fr);gap: 1rem;margin-bottom: 2.5rem;max-width: 400px;}
+
+.metric {background: var(--bg-card);border: 1px solid var(--border);border-radius: 10px;padding: 1rem 1.1rem;position: relative;overflow: hidden;}
+
+.metric::before {content: '';position: absolute;top: 0; left: 0;width: 3px;height: 100%;background: var(--accent);}
+
+.metric-num {font-family: var(--serif);font-size: 1.8rem;color: var(--ink);line-height: 1;margin-bottom: 0.2rem;}
+
+.metric-label {font-size: 0.75rem;color: var(--ink-muted);font-weight: 500;text-transform: uppercase;letter-spacing: 0.05em;}
+
+.hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.btn {display: inline-flex;align-items: center;gap: 0.5rem;padding: 0.7rem 1.4rem;font-family: var(--sans);font-size: 0.88rem;font-weight: 500;border-radius: 6px;text-decoration: none;transition: all 0.2s;cursor: pointer;border: none;}
+
+.btn-primary {background: var(--accent);color: white;}
+.btn-primary:hover { background: #155778; transform: translateY(-1px); }
+
+.btn-outline {background: transparent;color: var(--ink);border: 1.5px solid var(--border);}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── HERO RIGHT ── */
+.hero-right {position: relative;display: flex;align-items: center;justify-content: center;padding: 4rem 3rem;overflow: hidden;}
+
+.hero-right::before {content: '';position: absolute;inset: 0;background: linear-gradient(135deg, var(--accent-light) 0%, #F0EBE3 100%);opacity: 0.6;}
+
+.hero-visual {position: relative;z-index: 1;width: 100%;max-width: 420px;}
+
+.product-card {background: var(--bg-card);border: 1px solid var(--border);border-radius: 14px;padding: 1.5rem;box-shadow: 0 8px 40px rgba(15,25,35,0.08);margin-bottom: 1rem;animation: float 4s ease-in-out infinite;}
+
+@keyframes float {0%, 100% { transform: translateY(0); }50% { transform: translateY(-6px); }}
+
+.product-card:nth-of-type(2) { animation-delay: 0.5s; margin-left: 1.5rem; }
+.product-card:nth-of-type(3) { animation-delay: 1s; margin-left: 0.75rem; }
+
+.card-header {display: flex;align-items: center;gap: 0.75rem;margin-bottom: 0.75rem;}
+
+.card-icon {width: 36px;height: 36px;border-radius: 8px;display: flex;align-items: center;justify-content: center;font-size: 1.1rem;}
+
+.card-icon.blue { background: var(--accent-light); }
+.card-icon.warm { background: #FDEEE6; }
+.card-icon.green { background: #E6F4EF; }
+
+.card-title { font-weight: 600; font-size: 0.9rem; }
+.card-sub { font-size: 0.75rem; color: var(--ink-muted); }
+
+.card-stat {display: flex;justify-content: space-between;align-items: center;margin-top: 0.5rem;}
+
+.card-stat-num {font-family: var(--serif);font-size: 1.4rem;color: var(--accent);}
+
+.progress-bar {height: 4px;background: var(--tag-bg);border-radius: 2px;overflow: hidden;margin-top: 0.5rem;}
+
+.progress-fill {height: 100%;background: var(--accent);border-radius: 2px;transition: width 1.5s ease;}
+
+/* ── SECTION BASE ── */
+section {position: relative;z-index: 1;}
+
+.container {max-width: 1100px;margin: 0 auto;padding: 0 2.5rem;}
+
+.section-header {margin-bottom: 3rem;}
+
+.section-label {font-family: var(--mono);font-size: 0.75rem;color: var(--accent);text-transform: uppercase;letter-spacing: 0.12em;margin-bottom: 0.5rem;display: flex;align-items: center;gap: 0.5rem;}
+
+.section-label::before {content: '';display: inline-block;width: 20px;height: 1px;background: var(--accent);}
+
+.section-title {font-family: var(--serif);font-size: clamp(1.8rem, 3vw, 2.6rem);line-height: 1.1;letter-spacing: -0.02em;}
+
+.section-sub {font-size: 0.95rem;color: var(--ink-muted);margin-top: 0.75rem;max-width: 560px;}
+
+/* ── ABOUT STRIP ── */
+.about-strip {background: var(--ink);color: white;padding: 4rem 0;}
+
+.about-inner {max-width: 1100px;margin: 0 auto;padding: 0 2.5rem;display: grid;grid-template-columns: 1fr 2fr;gap: 4rem;align-items: center;}
+
+.about-label {font-family: var(--serif);font-size: 2rem;line-height: 1.15;color: white;}
+
+.about-label em { color: #7BB8D4; font-style: italic; }
+
+.about-text {font-size: 1rem;line-height: 1.75;color: rgba(255,255,255,0.75);}
+
+.about-text strong { color: white; font-weight: 600; }
+
+/* ── CASE STUDIES ── */
+.cases-section {padding: 6rem 0;}
+
+.cases-grid {display: grid;grid-template-columns: 1fr 1fr;gap: 1.5rem;}
+
+.case-card {background: var(--bg-card);border: 1px solid var(--border);border-radius: 14px;overflow: hidden;transition: transform 0.25s, box-shadow 0.25s;cursor: default;text-decoration: none;color: inherit;display: block;}
+
+.case-card:hover {transform: translateY(-4px);box-shadow: 0 16px 48px rgba(15,25,35,0.1);}
+
+.case-card.featured {grid-column: 1 / -1;display: grid;grid-template-columns: 1fr 1fr;}
+
+.case-visual {height: 180px;display: flex;align-items: center;justify-content: center;font-size: 3rem;position: relative;overflow: hidden;}
+
+.case-card.featured .case-visual {height: auto;min-height: 240px;}
+
+.case-visual.blue-bg { background: linear-gradient(135deg, #E8F3F9 0%, #C5DFF0 100%); }
+.case-visual.warm-bg { background: linear-gradient(135deg, #FDEEE6 0%, #F5D4C0 100%); }
+.case-visual.green-bg { background: linear-gradient(135deg, #E6F4EF 0%, #C0E0D5 100%); }
+.case-visual.dark-bg { background: linear-gradient(135deg, #1B3A5C 0%, #0F1923 100%); color: white; }
+
+.case-body { padding: 1.5rem; }
+
+.case-tags {display: flex;flex-wrap: wrap;gap: 0.4rem;margin-bottom: 0.85rem;}
+
+.tag {font-family: var(--mono);font-size: 0.68rem;padding: 0.25rem 0.6rem;border-radius: 4px;background: var(--tag-bg);color: var(--ink-soft);letter-spacing: 0.04em;text-transform: uppercase;}
+
+.tag.accent { background: var(--accent-light); color: var(--accent); }
+
+.case-title {font-family: var(--serif);font-size: 1.25rem;line-height: 1.2;margin-bottom: 0.5rem;letter-spacing: -0.01em;}
+
+.case-desc {font-size: 0.88rem;color: var(--ink-soft);line-height: 1.6;margin-bottom: 1rem;}
+
+.case-result {display: flex;align-items: center;gap: 0.5rem;font-size: 0.85rem;font-weight: 600;color: var(--accent);}
+
+.case-result::before {content: '→';font-size: 1rem;}
+
+/* ── SKILLS ── */
+.skills-section {background: var(--bg-card);border-top: 1px solid var(--border);border-bottom: 1px solid var(--border);padding: 5rem 0;}
+
+.skills-grid {display: grid;grid-template-columns: repeat(3, 1fr);gap: 1.5rem;}
+
+.skill-group {padding: 1.5rem;border: 1px solid var(--border);border-radius: 12px;background: var(--bg);}
+
+.skill-group-title {font-family: var(--mono);font-size: 0.72rem;text-transform: uppercase;letter-spacing: 0.1em;color: var(--accent);margin-bottom: 1rem;padding-bottom: 0.75rem;border-bottom: 1px solid var(--border);}
+
+.skill-list {display: flex;flex-wrap: wrap;gap: 0.4rem;}
+
+.skill-tag {font-size: 0.8rem;padding: 0.3rem 0.65rem;border-radius: 4px;background: var(--bg-card);border: 1px solid var(--border);color: var(--ink-soft);transition: all 0.15s;}
+
+.skill-tag:hover {border-color: var(--accent);color: var(--accent);}
+
+/* ── TIMELINE ── */
+.timeline-section { padding: 6rem 0; }
+
+.timeline {position: relative;padding-left: 2rem;}
+
+.timeline::before {content: '';position: absolute;left: 0;top: 8px;bottom: 8px;width: 1px;background: linear-gradient(to bottom, var(--accent), var(--border));}
+
+.timeline-item {position: relative;padding-bottom: 2.5rem;padding-left: 1.5rem;opacity: 0;transform: translateX(-10px);animation: slideIn 0.5s ease forwards;}
+
+.timeline-item:nth-of-type(1) { animation-delay: 0.1s; }
+.timeline-item:nth-of-type(2) { animation-delay: 0.25s; }
+.timeline-item:nth-of-type(3) { animation-delay: 0.4s; }
+
+@keyframes slideIn {to { opacity: 1; transform: translateX(0); }}
+
+.timeline-dot {position: absolute;left: -2.35rem;top: 6px;width: 10px;height: 10px;border-radius: 50%;background: var(--accent);border: 2px solid var(--bg);box-shadow: 0 0 0 2px var(--accent);}
+
+.timeline-date {font-family: var(--mono);font-size: 0.72rem;color: var(--accent);text-transform: uppercase;letter-spacing: 0.08em;margin-bottom: 0.3rem;}
+
+.timeline-role {font-weight: 600;font-size: 1.05rem;margin-bottom: 0.2rem;}
+
+.timeline-company {font-size: 0.88rem;color: var(--ink-muted);margin-bottom: 0.75rem;}
+
+.timeline-bullets {list-style: none;display: flex;flex-direction: column;gap: 0.35rem;}
+
+.timeline-bullets li {font-size: 0.88rem;color: var(--ink-soft);padding-left: 1rem;position: relative;line-height: 1.5;}
+
+.timeline-bullets li::before {content: '·';position: absolute;left: 0;color: var(--accent);font-weight: bold;}
+
+/* ── ARTIFACTS ── */
+.artifacts-section { padding: 6rem 0; background: var(--bg-card); border-top: 1px solid var(--border); }
+
+.artifacts-grid {display: grid;grid-template-columns: repeat(3, 1fr);gap: 1rem;}
+
+.artifact-card {border: 1px solid var(--border);border-radius: 10px;padding: 1.25rem;background: var(--bg);display: flex;flex-direction: column;gap: 0.6rem;transition: all 0.2s;text-decoration: none;color: inherit;}
+
+.artifact-card:hover {border-color: var(--accent);transform: translateY(-2px);}
+
+.artifact-icon {font-size: 1.5rem;margin-bottom: 0.2rem;}
+
+.artifact-title {font-weight: 600;font-size: 0.9rem;line-height: 1.3;}
+
+.artifact-desc {font-size: 0.8rem;color: var(--ink-muted);line-height: 1.5;}
+
+.artifact-status {display: inline-flex;align-items: center;gap: 0.3rem;font-size: 0.72rem;font-family: var(--mono);padding: 0.2rem 0.5rem;border-radius: 4px;margin-top: auto;}
+
+.status-live { background: #E6F4EF; color: #1B6B45; }
+.status-soon { background: var(--tag-bg); color: var(--ink-muted); }
+
+/* ── CONTACT ── */
+.contact-section {background: var(--ink);color: white;padding: 5rem 0;text-align: center;}
+
+.contact-title {font-family: var(--serif);font-size: clamp(2rem, 4vw, 3rem);margin-bottom: 0.75rem;letter-spacing: -0.02em;}
+
+.contact-title em { color: #7BB8D4; font-style: italic; }
+
+.contact-sub {color: rgba(255,255,255,0.6);margin-bottom: 2rem;font-size: 1rem;}
+
+.contact-links {display: flex;justify-content: center;gap: 1rem;flex-wrap: wrap;}
+
+.contact-link {display: inline-flex;align-items: center;gap: 0.5rem;padding: 0.7rem 1.4rem;border-radius: 6px;font-size: 0.88rem;font-weight: 500;text-decoration: none;transition: all 0.2s;}
+
+.contact-link.light {background: rgba(255,255,255,0.1);color: white;border: 1px solid rgba(255,255,255,0.15);}
+.contact-link.light:hover { background: rgba(255,255,255,0.18); }
+
+.contact-link.accent {background: var(--accent);color: white;}
+.contact-link.accent:hover { background: #155778; }
+
+/* ── FOOTER ── */
+footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padding: 1.5rem 2.5rem;display: flex;justify-content: space-between;align-items: center;color: rgba(255,255,255,0.35);font-size: 0.78rem;}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 3rem 1.5rem; }
+  .about-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+  .cases-grid { grid-template-columns: 1fr; }
+  .case-card.featured { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .artifacts-grid { grid-template-columns: 1fr 1fr; }
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {opacity: 0;transform: translateY(20px);transition: opacity 0.6s ease, transform 0.6s ease;}
+.reveal.visible {opacity: 1;transform: translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Ade Okerinde</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#artifacts">Artifacts</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">Product Manager · AI Process Optimization · Healthcare & Insurance</div>
+    <div class="hero-eyebrow">Product Manager · AI Product Owner · Healthcare & Insurance</div>
     <h1 class="hero-name">Ade<br><em>Okerinde</em></h1>
-    <p class="hero-title">I turn complex operational problems into measurable product outcomes across AI-enabled workflows, claims automation, analytics platforms, and regulated healthcare and insurance environments.</p>
+    <p class="hero-title">Turning claims, fraud, and pricing data into shipped AI-enabled products — 8+ years defining roadmaps, running the backlog, and proving the ROI in regulated, data-intensive environments.</p>
 
-    <div class="hero-metrics" aria-label="Selected portfolio metrics">
+    <div class="hero-metrics">
       <div class="metric">
-        <div class="metric-num">8+ yrs</div>
-        <div class="metric-label">Product & Analytics Experience</div>
-      </div>
-      <div class="metric">
-        <div class="metric-num">$1.2M</div>
+        <div class="metric-num">$1.2M+</div>
         <div class="metric-label">Annual Savings Delivered</div>
       </div>
       <div class="metric">
         <div class="metric-num">30%</div>
-        <div class="metric-label">Claims Cycle Time Reduction</div>
+        <div class="metric-label">Claims Cycle-Time Reduction</div>
       </div>
       <div class="metric">
         <div class="metric-num">97%</div>
         <div class="metric-label">Sprint Completion Rate</div>
       </div>
+      <div class="metric">
+        <div class="metric-num">8+ Yrs</div>
+        <div class="metric-label">Product & BA Delivery</div>
+      </div>
     </div>
 
     <div class="hero-ctas">
-      <a href="#projects" class="btn btn-primary">View Projects</a>
-      <a href="{{ '/assets/Ade_Okerinde_Resume.pdf' | relative_url }}" class="btn btn-outline" download>Download Resume</a>
-      <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-SLUG" class="btn btn-outline" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="#work" class="btn btn-primary">View Case Studies</a>
+      <a href="Ade_Okerinde.pdf" class="btn btn-outline" download>Download Resume</a>
+      <a href="https://linkedin.com/in/adeokerinde" class="btn btn-outline" target="_blank">LinkedIn ↗</a>
     </div>
   </div>
 
-  <div class="hero-right" aria-hidden="true">
+  <div class="hero-right">
     <div class="hero-visual">
       <div class="product-card">
         <div class="card-header">
           <div class="card-icon blue">🤖</div>
           <div>
-            <div class="card-title">AI Claims Automation</div>
-            <div class="card-sub">Healthcare operations · Workflow modernization</div>
+            <div class="card-title">Claims & Compliance Automation</div>
+            <div class="card-sub">AI + RPA · Molina Healthcare</div>
           </div>
         </div>
         <div class="card-stat">
-          <span>Cycle time reduction</span>
+          <span style="font-size:0.8rem;color:var(--ink-muted)">Cycle time reduction</span>
           <span class="card-stat-num">30%</span>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="width: 82%"></div></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:78%"></div></div>
       </div>
 
       <div class="product-card">
         <div class="card-header">
           <div class="card-icon warm">📊</div>
           <div>
-            <div class="card-title">Enterprise BI Platform</div>
-            <div class="card-sub">Data marts · Power BI · self-service analytics</div>
+            <div class="card-title">Self-Service Analytics Rollout</div>
+            <div class="card-sub">Enterprise Data Integration · Molina</div>
           </div>
         </div>
         <div class="card-stat">
-          <span>Reporting accuracy lift</span>
+          <span style="font-size:0.8rem;color:var(--ink-muted)">Reporting accuracy lift</span>
           <span class="card-stat-num">22%</span>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="width: 74%"></div></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div>
       </div>
 
       <div class="product-card">
         <div class="card-header">
-          <div class="card-icon green">⚡</div>
+          <div class="card-icon green">🛡️</div>
           <div>
-            <div class="card-title">Agile Delivery</div>
-            <div class="card-sub">Roadmaps · user stories · release planning</div>
+            <div class="card-title">Ethical AI Governance Framework</div>
+            <div class="card-sub">Fraud, Identity & Compliance · Molina</div>
           </div>
         </div>
         <div class="card-stat">
-          <span>Sprint completion</span>
-          <span class="card-stat-num">97%</span>
+          <span style="font-size:0.8rem;color:var(--ink-muted)">Funding secured</span>
+          <span class="card-stat-num">$500K</span>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="width: 97%"></div></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="about-strip" id="about">
+<!-- ABOUT STRIP -->
+<div class="about-strip">
   <div class="about-inner">
-    <div class="about-label">A PM who connects <em>strategy</em>, data, and execution.</div>
+    <div class="about-label">A PM who ships where <em>data meets regulation.</em></div>
     <p class="about-text">
-      I am a Product Manager with 8+ years of experience driving <strong>AI-enabled process optimization, workflow automation, and data-driven transformation</strong> across healthcare, insurance, and operations. I specialize in translating business problems into clear product strategy, measurable KPIs, prioritized backlogs, and scalable solutions that improve throughput, reduce cost, and support adoption.
-      <br><br>
-      My work spans claims automation, business intelligence platforms, AI solution enablement, stakeholder alignment, Agile delivery, UAT, data governance, and enterprise solution delivery.
+      I'm a Product Manager with 8+ years driving <strong>AI-enabled process optimization, workflow automation, and data-driven transformation</strong> across healthcare and insurance. At <strong>Molina Healthcare</strong> I own AI and automation product strategy across claims, fraud, identity, and personalization — writing the roadmap, running the backlog, and partnering with data science and clinical teams to get models into production responsibly. Before that, at <strong>Axxess</strong>, I built enterprise analytics and BI products across supply chain, finance, and operations.<br><br>
+      I've reduced claims cycle times by <strong>30%</strong>, generated roughly <strong>$1.2M</strong> in annual savings through AI/RPA automation, and secured <strong>$500K</strong> in funding for AI initiatives by building the ROI case myself. I hold <strong>CSM, CSPO, Power BI Data Analyst Associate,</strong> and <strong>Tableau Desktop Specialist</strong> certifications, and I'm completing an <strong>M.S. in Data Science</strong> at Eastern University.
     </p>
   </div>
-</section>
+</div>
 
-<section class="cases-section" id="projects">
+<!-- CASE STUDIES -->
+<section class="cases-section" id="work">
   <div class="container">
     <div class="section-header reveal">
-      <div class="section-label">Portfolio Projects</div>
-      <h2 class="section-title">Case studies built for measurable business outcomes.</h2>
-      <p class="section-sub">Replace the placeholder repository links with your live GitHub repositories or demos.</p>
+      <div class="section-label">Case Studies</div>
+      <h2 class="section-title">Products Built.<br>Problems Solved.</h2>
+      <div class="section-sub">End-to-end product ownership across claims automation, AI governance, and self-service analytics.</div>
     </div>
 
     <div class="cases-grid">
-      <a href="case-studies/root-pricing-velocity.html" class="case-card featured reveal">
-        <div class="case-visual blue-bg"><span>🚗</span></div>
+
+      <!-- FEATURED -->
+      <div class="case-card featured reveal">
+        <div class="case-visual blue-bg">
+          <span style="font-size:4rem">🤖</span>
+        </div>
         <div class="case-body">
           <div class="case-tags">
             <span class="tag accent">Featured</span>
-            <span class="tag">Insurtech</span>
-            <span class="tag">Pricing</span>
-            <span class="tag">CI/CD</span>
+            <span class="tag">Healthcare AI</span>
+            <span class="tag">RPA</span>
+            <span class="tag">Claims Automation</span>
           </div>
-          <h3 class="case-title">Pricing Velocity Accelerator for Root Insurance</h3>
-          <p class="case-desc">A GitHub-hosted case study showing how to compress pricing deployment timelines from data/model features to production pricing changes using automated validation, model registry, CI/CD, feature flags, and regulatory documentation.</p>
-          <div class="case-result">Target: 12 weeks → 2 weeks · faster pricing releases · safer rollout</div>
+          <h3 class="case-title">AI & RPA-Driven Claims and Compliance Automation</h3>
+          <p class="case-desc">Owned the product strategy behind an AI and RPA rollout that redesigned claims and compliance workflows at Molina Healthcare — defining success metrics, monitoring model performance, and driving adoption through change management, without disrupting live operations.</p>
+          <div class="case-result">$1.2M+ annual savings · 30% cycle-time reduction · 25% error-rate reduction</div>
         </div>
-      </a>
+      </div>
 
-      <a href="#" class="case-card reveal">
-        <div class="case-visual warm-bg"><span>🤖</span></div>
-        <div class="case-body">
-          <div class="case-tags"><span class="tag">AI</span><span class="tag">Claims</span><span class="tag">Automation</span></div>
-          <h3 class="case-title">AI Claims Automation</h3>
-          <p class="case-desc">Streamlined claims and compliance workflows using AI/RPA initiatives that reduced cycle times, error rates, and manual audit effort.</p>
-          <div class="case-result">30% cycle-time reduction · 25% error reduction · $1.2M savings</div>
+      <div class="case-card reveal">
+        <div class="case-visual green-bg">
+          <span style="font-size:3rem">🛡️</span>
         </div>
-      </a>
+        <div class="case-body">
+          <div class="case-tags">
+            <span class="tag accent">Governance</span>
+            <span class="tag">AI Ethics</span>
+          </div>
+          <h3 class="case-title">Ethical AI Adoption Framework</h3>
+          <p class="case-desc">Established measurable AI adoption frameworks across fraud, identity, and personalization products — defining success metrics and monitoring real-world performance to keep every AI-powered launch fair, transparent, and audit-ready.</p>
+          <div class="case-result">Scaled AI responsibly across multiple regulated product lines</div>
+        </div>
+      </div>
 
-      <a href="#" class="case-card reveal">
-        <div class="case-visual green-bg"><span>📈</span></div>
-        <div class="case-body">
-          <div class="case-tags"><span class="tag">Power BI</span><span class="tag">Analytics</span><span class="tag">Data Product</span></div>
-          <h3 class="case-title">Enterprise BI & Self-Service Analytics</h3>
-          <p class="case-desc">Centralized enterprise data into scalable BI products and dashboards that improved operational visibility and reporting accuracy.</p>
-          <div class="case-result">22% reporting accuracy improvement · scalable self-service analytics</div>
+      <div class="case-card reveal">
+        <div class="case-visual warm-bg">
+          <span style="font-size:3rem">📊</span>
         </div>
-      </a>
+        <div class="case-body">
+          <div class="case-tags">
+            <span class="tag">Self-Service</span>
+            <span class="tag">Data Platform</span>
+          </div>
+          <h3 class="case-title">Enterprise Data Integration for Self-Service Analytics</h3>
+          <p class="case-desc">Led data integration across marts, warehouses, and cloud platforms to enable scalable self-service analytics, reducing dependency on central reporting teams and improving the UX for everyday data consumers.</p>
+          <div class="case-result">22% reporting accuracy improvement · reduced central-team dependency</div>
+        </div>
+      </div>
 
-      <a href="#" class="case-card reveal">
-        <div class="case-visual dark-bg"><span>🧭</span></div>
-        <div class="case-body">
-          <div class="case-tags"><span class="tag">Agile</span><span class="tag">Product Ops</span><span class="tag">Roadmap</span></div>
-          <h3 class="case-title">Product Delivery Operating Model</h3>
-          <p class="case-desc">Built roadmap, backlog, KPI, UAT, and governance practices to improve sprint completion, reduce project waste, and accelerate stakeholder decisions.</p>
-          <div class="case-result">97% sprint completion · 20% velocity improvement · 15% waste reduction</div>
+      <div class="case-card reveal">
+        <div class="case-visual dark-bg">
+          <span style="font-size:3rem">🗺️</span>
         </div>
-      </a>
+        <div class="case-body">
+          <div class="case-tags">
+            <span class="tag">Roadmap</span>
+            <span class="tag">Supply Chain BI</span>
+          </div>
+          <h3 class="case-title">Multi-Year Analytics Roadmap — Axxess</h3>
+          <p class="case-desc">Owned the product vision and prioritized backlog for enterprise analytics spanning demand planning, inventory, logistics, and supplier risk, aligning outcomes to cost, service level, and revenue-growth metrics.</p>
+          <div class="case-result">Trusted, auditable BI coverage across 5 operational domains</div>
+        </div>
+      </div>
+
+      <div class="case-card reveal">
+        <div class="case-visual blue-bg">
+          <span style="font-size:3rem">⚙️</span>
+        </div>
+        <div class="case-body">
+          <div class="case-tags">
+            <span class="tag">Agile Delivery</span>
+            <span class="tag">Backlog</span>
+          </div>
+          <h3 class="case-title">150+ Story Agile Delivery Engine</h3>
+          <p class="case-desc">Authored 150+ user stories with acceptance criteria and dependencies and facilitated every Scrum ceremony end-to-end, keeping a large, matrixed AI/automation program predictable under shifting priorities.</p>
+          <div class="case-result">97% sprint completion · 20% velocity improvement</div>
+        </div>
+      </div>
+
+      <div class="case-card reveal">
+        <div class="case-visual green-bg">
+          <span style="font-size:3rem">💰</span>
+        </div>
+        <div class="case-body">
+          <div class="case-tags">
+            <span class="tag">Business Case</span>
+            <span class="tag">ROI</span>
+          </div>
+          <h3 class="case-title">Executive Business Cases & ROI Modeling</h3>
+          <p class="case-desc">Built data-driven business cases and ROI models that translated technical AI initiatives into cost-benefit terms executives could approve quickly — without owning the budget myself.</p>
+          <div class="case-result">$500K funding secured · 18% cost-benefit improvement · approved in 2 review cycles</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
+<!-- SKILLS -->
 <section class="skills-section" id="skills">
   <div class="container">
     <div class="section-header reveal">
-      <div class="section-label">Skills & Technologies</div>
-      <h2 class="section-title">Technical credibility with product management sensibility.</h2>
+      <div class="section-label">Capabilities</div>
+      <h2 class="section-title">Product depth. Data fluency.<br>Regulated-industry judgment.</h2>
     </div>
-
     <div class="skills-grid reveal">
       <div class="skill-group">
-        <div class="skill-group-title">Product & Delivery</div>
+        <div class="skill-group-title">Product & PM Core</div>
         <div class="skill-list">
-          <span class="skill-tag">Product Ownership</span><span class="skill-tag">Backlog Management</span><span class="skill-tag">Roadmap Planning</span><span class="skill-tag">Release Planning</span><span class="skill-tag">User Stories</span><span class="skill-tag">Acceptance Criteria</span><span class="skill-tag">KPI Definition</span>
+          <span class="skill-tag">Product Vision & Roadmap</span>
+          <span class="skill-tag">PRDs</span>
+          <span class="skill-tag">Backlog Management</span>
+          <span class="skill-tag">KPI Design</span>
+          <span class="skill-tag">Requirements Management</span>
+          <span class="skill-tag">Risk Identification & Mitigation</span>
+          <span class="skill-tag">Release Planning</span>
+          <span class="skill-tag">UAT / QA / SDLC</span>
         </div>
       </div>
       <div class="skill-group">
         <div class="skill-group-title">AI & Automation</div>
         <div class="skill-list">
-          <span class="skill-tag">AI Product Strategy</span><span class="skill-tag">Workflow Automation</span><span class="skill-tag">RPA</span><span class="skill-tag">ChatGPT</span><span class="skill-tag">Copilot</span><span class="skill-tag">Claude</span><span class="skill-tag">MVP Design</span>
+          <span class="skill-tag">AI Product Strategy</span>
+          <span class="skill-tag">RPA</span>
+          <span class="skill-tag">Predictive Modeling</span>
+          <span class="skill-tag">AI Governance & Compliance</span>
+          <span class="skill-tag">ChatGPT</span>
+          <span class="skill-tag">Claude</span>
+          <span class="skill-tag">Copilot</span>
+          <span class="skill-tag">Loveable</span>
         </div>
       </div>
       <div class="skill-group">
-        <div class="skill-group-title">Data & Reporting</div>
+        <div class="skill-group-title">Data & Analytics</div>
         <div class="skill-list">
-          <span class="skill-tag">SQL</span><span class="skill-tag">Power BI</span><span class="skill-tag">Tableau</span><span class="skill-tag">Excel</span><span class="skill-tag">BI Platforms</span><span class="skill-tag">Data Governance</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">Data Governance</span>
+          <span class="skill-tag">A/B Testing</span>
+          <span class="skill-tag">BI Platform Architecture</span>
         </div>
       </div>
       <div class="skill-group">
-        <div class="skill-group-title">Healthcare & Insurance</div>
+        <div class="skill-group-title">Healthcare & Insurance Domain</div>
         <div class="skill-list">
-          <span class="skill-tag">Claims Systems</span><span class="skill-tag">Compliance</span><span class="skill-tag">Healthcare Operations</span><span class="skill-tag">Insurance Domain</span><span class="skill-tag">Risk Mitigation</span>
+          <span class="skill-tag">Claims Systems</span>
+          <span class="skill-tag">Fraud & Identity</span>
+          <span class="skill-tag">Personalization</span>
+          <span class="skill-tag">Regulatory Compliance</span>
+          <span class="skill-tag">Insurance Operations</span>
+          <span class="skill-tag">Workflow Modernization</span>
         </div>
       </div>
       <div class="skill-group">
-        <div class="skill-group-title">Tools</div>
+        <div class="skill-group-title">Agile & Delivery</div>
         <div class="skill-list">
-          <span class="skill-tag">Jira</span><span class="skill-tag">Confluence</span><span class="skill-tag">Azure DevOps</span><span class="skill-tag">SharePoint</span><span class="skill-tag">Salesforce</span><span class="skill-tag">SAP</span><span class="skill-tag">Snagit</span><span class="skill-tag">Figma</span><span class="skill-tag">Miro</span>
+          <span class="skill-tag">Scrum</span>
+          <span class="skill-tag">Kanban</span>
+          <span class="skill-tag">Scrumban</span>
+          <span class="skill-tag">Waterfall</span>
+          <span class="skill-tag">Change Management</span>
+          <span class="skill-tag">Cross-Functional Leadership</span>
         </div>
       </div>
       <div class="skill-group">
-        <div class="skill-group-title">Methods</div>
+        <div class="skill-group-title">Tools & Platforms</div>
         <div class="skill-list">
-          <span class="skill-tag">Agile</span><span class="skill-tag">Scrum</span><span class="skill-tag">Kanban</span><span class="skill-tag">Waterfall</span><span class="skill-tag">Scrumban</span><span class="skill-tag">UAT</span><span class="skill-tag">QA Coordination</span><span class="skill-tag">SDLC</span>
+          <span class="skill-tag">JIRA</span>
+          <span class="skill-tag">Confluence</span>
+          <span class="skill-tag">Azure DevOps</span>
+          <span class="skill-tag">SharePoint</span>
+          <span class="skill-tag">Salesforce</span>
+          <span class="skill-tag">SAP</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Visio</span>
+          <span class="skill-tag">Lucidchart</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Miro</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- EXPERIENCE TIMELINE -->
 <section class="timeline-section" id="experience">
   <div class="container">
     <div class="section-header reveal">
       <div class="section-label">Experience</div>
-      <h2 class="section-title">Experience across AI, analytics, healthcare, and insurance operations.</h2>
+      <h2 class="section-title">8+ years of delivery.<br>Built to last.</h2>
+      <div class="section-sub">From enterprise analytics at Axxess to AI product ownership at Molina Healthcare.</div>
     </div>
-
     <div class="timeline reveal">
       <div class="timeline-item">
         <div class="timeline-dot"></div>
@@ -216,10 +596,15 @@ description: "Product Manager portfolio showcasing AI-enabled process optimizati
         <div class="timeline-role">Product Manager | AI Process Optimization | AI Product Owner</div>
         <div class="timeline-company">Molina Healthcare · Long Beach, CA</div>
         <ul class="timeline-bullets">
-          <li>Led enterprise digital and AI product initiatives across web and mobile platforms, defining product vision, KPIs, and roadmaps.</li>
-          <li>Streamlined claims and compliance automation through AI and RPA, reducing cycle times by 30%, error rates by 25%, and manual audit effort by 40%.</li>
-          <li>Authored 150+ user stories with acceptance criteria and dependencies, improving sprint completion to 97% and team velocity by 20%.</li>
-          <li>Developed data-driven business cases and ROI models that secured $500K in funding and improved cost-benefit ratios by 18%.</li>
+          <li>Led enterprise digital and AI product initiatives across web and mobile, defining product vision, KPIs, and roadmaps using analytics, A/B testing, and user research</li>
+          <li>Defined and executed AI product strategies spanning personalization, fraud, identity, and automation solutions</li>
+          <li>Streamlined claims and compliance automation through AI and RPA, reducing cycle times by 30%, error rates by 25%, and manual audit effort by 40% — ~$1.2M in annual savings</li>
+          <li>Authored 150+ user stories with acceptance criteria, facilitating ceremonies and improving sprint completion to 97% and velocity by 20%</li>
+          <li>Developed ROI models and investment proposals that secured $500K in funding and 18% cost-benefit improvement, approved within two review cycles</li>
+          <li>Partnered with clinical, operations, analytics, data science, and engineering teams to prioritize data initiatives against organizational strategy</li>
+          <li>Led enterprise data integration across marts, warehouses, and cloud platforms, increasing reporting accuracy by 22% and enabling self-service analytics</li>
+          <li>Served as primary liaison between business, IT, audit, and external partners — eliminating 15% of project waste and cutting change-request turnaround by 30%</li>
+          <li>Established ethical, measurable AI adoption frameworks ensuring fairness, transparency, privacy, and regulatory compliance</li>
         </ul>
       </div>
 
@@ -229,82 +614,123 @@ description: "Product Manager portfolio showcasing AI-enabled process optimizati
         <div class="timeline-role">Business Analyst / Data Analyst</div>
         <div class="timeline-company">Axxess · Dallas, TX</div>
         <ul class="timeline-bullets">
-          <li>Owned and evolved product vision, roadmap, and prioritized backlog for analytics, digital, and AI-enabled products.</li>
-          <li>Translated complex business needs into epics, features, and user stories with measurable value.</li>
-          <li>Partnered with Data Engineering, BI, Architecture, UX, and Engineering teams to design scalable cloud-based analytics solutions.</li>
-          <li>Championed data governance, metric standardization, and single-source-of-truth principles for executive and operational users.</li>
+          <li>Owned the product vision, multi-year roadmap, and prioritized backlog for enterprise analytics and AI-enabled products across supply chain, finance, and operations</li>
+          <li>Defined product outcomes and success metrics aligned to cost optimization, service levels, inventory efficiency, and revenue growth</li>
+          <li>Translated complex business needs into epics, features, and user stories enabling consistent Agile delivery</li>
+          <li>Partnered with Data Engineering, BI, Architecture, and UX to design scalable, cloud-based data platforms and dashboards</li>
+          <li>Drove advanced analytics and BI products across demand planning, inventory, logistics, manufacturing performance, and supplier risk</li>
+          <li>Championed data governance and single-source-of-truth principles for trusted, auditable insights</li>
+          <li>Acted as trusted advisor to senior leaders, translating strategy into product investment decisions</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Education & Certifications</div>
+        <div class="timeline-role">M.S. Data Science · B.S. Mathematics</div>
+        <div class="timeline-company">Eastern University · Worcester State University</div>
+        <ul class="timeline-bullets">
+          <li>Certified Scrum Master (CSM) · Certified Scrum Product Owner (CSPO)</li>
+          <li>Microsoft Certified: Power BI Data Analyst Associate</li>
+          <li>Tableau Certified Desktop Specialist</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="education-section" id="education">
+<!-- ARTIFACTS -->
+<section class="artifacts-section" id="artifacts">
   <div class="container">
     <div class="section-header reveal">
-      <div class="section-label">Education & Certifications</div>
-      <h2 class="section-title">Continuous learning for data-driven product leadership.</h2>
+      <div class="section-label">Artifacts & Documentation</div>
+      <h2 class="section-title">Real work.<br>Real deliverables.</h2>
     </div>
-
-    <div class="education-grid reveal">
-      <div class="education-card">
-        <div class="education-date">June 2026</div>
-        <h3>M.Sc. Data Science</h3>
-        <p>Eastern University · St. Davids, PA</p>
-      </div>
-      <div class="education-card">
-        <div class="education-date">May 2004</div>
-        <h3>B.Sc. Mathematics</h3>
-        <p>Worcester State University · Worcester, MA</p>
-      </div>
-      <div class="education-card">
-        <div class="education-date">Certifications</div>
-        <h3>CSM · CSPO · Power BI · Tableau</h3>
-        <p>Certified Scrum Master, Certified Scrum Product Owner, Microsoft Power BI Data Analyst Associate, Tableau Desktop Specialist.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="artifacts-section" id="github">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">GitHub Projects</div>
-      <h2 class="section-title">Repository links and technical artifacts.</h2>
-      <p class="section-sub">Use the cards below for your actual repositories, demos, case study docs, product artifacts, or portfolio projects.</p>
-    </div>
-
-    <div class="artifacts-grid reveal" id="github-projects">
-      <a href="https://github.com/YOUR-GITHUB-USERNAME/root-pricing-velocity-accelerator" class="artifact-card" target="_blank" rel="noopener">
-        <div class="artifact-icon">🚗</div>
-        <div class="artifact-title">Root Pricing Velocity Accelerator</div>
-        <div class="artifact-desc">Insurtech pricing CI/CD case study with model validation gates, feature flags, regulatory documentation, and before/after metrics.</div>
-        <span class="artifact-status status-live">● Replace URL</span>
-      </a>
-      <a href="#" class="artifact-card">
+    <div class="artifacts-grid reveal">
+      <div class="artifact-card">
         <div class="artifact-icon">📋</div>
-        <div class="artifact-title">Product Requirements Document</div>
-        <div class="artifact-desc">Sample PRD structure for AI-enabled claims automation, including KPIs, user stories, and acceptance criteria.</div>
-        <span class="artifact-status status-soon">○ Placeholder</span>
-      </a>
-      <a href="#" class="artifact-card">
-        <div class="artifact-icon">📊</div>
-        <div class="artifact-title">Power BI / SQL Analytics Samples</div>
-        <div class="artifact-desc">Portfolio-ready examples for business intelligence, operational reporting, and executive KPI dashboards.</div>
-        <span class="artifact-status status-soon">○ Placeholder</span>
-      </a>
+        <div class="artifact-title">PRD: Claims & Compliance Automation</div>
+        <div class="artifact-desc">Product requirements document covering problem statement, user stories, acceptance criteria, and success metrics for the AI/RPA claims initiative.</div>
+        <span class="artifact-status status-soon">○ Coming Soon</span>
+      </div>
+      <div class="artifact-card">
+        <div class="artifact-icon">🛡️</div>
+        <div class="artifact-title">Framework: Ethical AI Adoption</div>
+        <div class="artifact-desc">Success-metric and monitoring framework for fairness, transparency, and regulatory compliance across AI-powered products.</div>
+        <span class="artifact-status status-soon">○ Coming Soon</span>
+      </div>
+      <div class="artifact-card">
+        <div class="artifact-icon">🗺️</div>
+        <div class="artifact-title">Product Roadmap Framework</div>
+        <div class="artifact-desc">Outcome-based roadmap template with ROI modeling, prioritization scoring, and stakeholder communication layer.</div>
+        <span class="artifact-status status-soon">○ Coming Soon</span>
+      </div>
+      <div class="artifact-card">
+        <div class="artifact-icon">🔍</div>
+        <div class="artifact-title">SQL: Claims & Fraud Analysis Queries</div>
+        <div class="artifact-desc">Sample SQL queries for claims cycle-time reporting, fraud-signal validation, and KPI tracking dashboards.</div>
+        <span class="artifact-status status-soon">○ Coming Soon</span>
+      </div>
+      <div class="artifact-card">
+        <div class="artifact-icon">📝</div>
+        <div class="artifact-title">User Stories: Self-Service Analytics</div>
+        <div class="artifact-desc">Epic-Feature-Story structure with acceptance criteria for the enterprise data integration and self-service analytics rollout.</div>
+        <span class="artifact-status status-soon">○ Coming Soon</span>
+      </div>
+      <div class="artifact-card">
+        <div class="artifact-icon">🎯</div>
+        <div class="artifact-title">OKR & Business Case Template</div>
+        <div class="artifact-desc">ROI and cost-benefit modeling template used to secure executive funding approval within two review cycles.</div>
+        <span class="artifact-status status-soon">○ Coming Soon</span>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="container">
-    <h2 class="contact-title">Let’s build products<br><em>that move the business.</em></h2>
-    <p class="contact-sub">Open to Product Manager, Product Owner, AI Product, Analytics, Healthcare, Insurance, and Business Analyst roles.</p>
+    <h2 class="contact-title">Let's build something<br><em>that matters.</em></h2>
+    <p class="contact-sub">Open to Senior Product Manager roles in insurtech, fintech, and other data-intensive regulated environments — remote or hybrid.</p>
     <div class="contact-links">
       <a href="mailto:addieokerinde@gmail.com" class="contact-link accent">✉ addieokerinde@gmail.com</a>
-      <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-SLUG" target="_blank" rel="noopener" class="contact-link light">LinkedIn ↗</a>
-      <a href="{{ '/assets/Ade_Okerinde_Resume.pdf' | relative_url }}" class="contact-link light" download>Download Resume</a>
+      <a href="tel:+13462188294" class="contact-link light">☎ (346) 218-8294</a>
+      <a href="https://linkedin.com/in/adeokerinde" target="_blank" class="contact-link light">LinkedIn ↗</a>
+      <a href="Ade_Okerinde.pdf" class="contact-link light" download>Download Resume</a>
     </div>
   </div>
 </section>
+
+<footer>
+  <span>© <span id="year"></span> Ade Okerinde</span>
+  <span>Product Manager · AI Product Owner · CSPO · CSM</span>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Animate progress bars on load
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.querySelectorAll('.progress-fill').forEach(bar => {
+      const w = bar.style.width;
+      bar.style.width = '0%';
+      setTimeout(() => bar.style.width = w, 100);
+    });
+  }, 500);
+});
+</script>
+
+</body>
+</html>
