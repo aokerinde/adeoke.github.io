@@ -1,0 +1,45 @@
+# Example versioned rating-variable definition.
+# In the proposed pipeline, this file (not a spreadsheet or slide deck) is the
+# single source of truth that data science, actuarial, and engineering all
+# read from and comment on via pull request.
+
+feature:
+  id: hard_braking_frequency_v3
+  display_name: "Hard Braking Frequency (per 100 trips)"
+  owner: data-science
+  status: proposed          # proposed -> actuarial_review -> approved -> filed -> live
+
+description: >
+  Telematics-derived rating factor capturing frequency of hard-braking events
+  normalized per 100 trips over the prior 90-day window. Replaces v2, which
+  used a 30-day window and showed higher variance for low-mileage drivers.
+
+data_sources:
+  - telematics.trip_events        # raw event stream
+  - telematics.trip_summary        # trip counts for normalization
+  window_days: 90
+  min_trips_required: 15           # drivers below this are held on prior factor
+
+model:
+  type: generalized_linear_model
+  link_function: log
+  training_window: "2024-01-01:2026-01-01"
+  validation_split: 0.2
+  approved_states: []              # populated only after actuarial + filing approval
+
+actuarial_review:
+  reviewer: null                   # assigned when status -> actuarial_review
+  rate_disruption_threshold_pct: 12   # max allowable single-factor swing without flag
+  comments: []                     # inline PR-review comments live here, not in email
+
+regulatory:
+  requires_filing: true
+  disclosure_language_ref: docs/disclosures/hard_braking_v3.md
+
+rollout:
+  strategy: feature_flag
+  initial_exposure_pct: 1
+  ramp_schedule: [1, 10, 25, 100]
+  guardrails:
+    max_loss_ratio_delta_pct: 5
+    max_conversion_delta_pct: -3

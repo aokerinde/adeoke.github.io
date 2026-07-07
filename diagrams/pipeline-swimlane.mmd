@@ -1,0 +1,25 @@
+%% Root Pricing Deployment — Team Swimlane View
+%% Render on GitHub natively, or at https://mermaid.live
+
+sequenceDiagram
+    participant DS as Data Science
+    participant CI as Automated Validation (CI)
+    participant ACT as Actuarial
+    participant ENG as Engineering
+    participant LEG as Legal/Compliance
+    participant REG as State Regulator
+    participant PROD as Production
+
+    DS->>CI: Commit feature definition + model (PR)
+    CI-->>DS: Auto data-quality + back-test results (minutes, not weeks)
+    CI->>ACT: Auto-generated rate impact dashboard
+    ACT-->>DS: Review comments as PR review (parallel, threaded)
+    ACT->>ENG: Approval merges the PR (no re-implementation needed)
+    ENG->>LEG: Auto-generated disclosure language for review
+    par Filing prep runs in parallel with deployment prep
+        LEG->>REG: Submit filing package (auto-populated exhibit)
+        ENG->>PROD: Deploy to containerized shadow environment
+    end
+    REG-->>LEG: Filing approved / effective date confirmed
+    ENG->>PROD: Feature-flagged rollout 1% -> 10% -> 100%
+    PROD-->>DS: Automated guardrail monitoring + rollback triggers
