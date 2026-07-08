@@ -100,6 +100,77 @@ code.inline {font-family: var(--mono);font-size: 0.85em;background: var(--tag-bg
 
 footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padding: 1.5rem 2.5rem;display: flex;justify-content: space-between;align-items: center;color: rgba(255,255,255,0.35);font-size: 0.78rem;}
 
+/* ── INTERACTIVE DASHBOARD ── */
+.dash-card {background: var(--bg-card);border: 1px solid var(--border);border-radius: 14px;padding: 1.75rem;margin: 1.5rem 0 2rem;}
+
+.dash-card-header {display: flex;justify-content: space-between;align-items: center;flex-wrap: wrap;gap: 0.75rem;margin-bottom: 1.25rem;}
+
+.dash-card-title {font-family: var(--serif);font-size: 1.15rem;letter-spacing: -0.01em;}
+
+.dash-toggle {display: inline-flex;background: var(--tag-bg);border-radius: 8px;padding: 0.2rem;gap: 0.2rem;}
+
+.dash-toggle-btn {font-family: var(--sans);font-size: 0.8rem;font-weight: 500;padding: 0.45rem 0.9rem;border-radius: 6px;border: none;background: transparent;color: var(--ink-soft);cursor: pointer;transition: all 0.2s;}
+
+.dash-toggle-btn.active {background: var(--accent);color: white;}
+
+.dash-total-row {display: flex;align-items: baseline;gap: 0.6rem;margin-bottom: 1.1rem;}
+
+.dash-total-num {font-family: var(--serif);font-size: 2.4rem;color: var(--accent);line-height: 1;transition: all 0.3s ease;}
+
+.dash-total-label {font-size: 0.82rem;color: var(--ink-muted);}
+
+.dash-bar {display: flex;width: 100%;height: 40px;border-radius: 8px;overflow: hidden;margin-bottom: 1rem;box-shadow: inset 0 0 0 1px var(--border);}
+
+.dash-bar-seg {height: 100%;display: flex;align-items: center;justify-content: center;font-family: var(--mono);font-size: 0.68rem;color: white;white-space: nowrap;overflow: hidden;transition: width 0.5s ease, opacity 0.3s ease;position: relative;cursor: default;}
+
+.dash-bar-seg:hover { opacity: 0.85; }
+
+.dash-legend {display: flex;flex-wrap: wrap;gap: 0.5rem 1rem;}
+
+.dash-legend-item {display: flex;align-items: center;gap: 0.4rem;font-size: 0.78rem;color: var(--ink-soft);}
+
+.dash-legend-dot {width: 9px;height: 9px;border-radius: 2px;flex-shrink: 0;}
+
+.dash-sliders {display: flex;flex-direction: column;gap: 1.1rem;margin-bottom: 1.25rem;}
+
+.dash-slider-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.dash-slider-label {font-size: 0.85rem;color: var(--ink-soft);font-weight: 500;}
+
+.dash-slider-label span#lossRatioVal, .dash-slider-label span#conversionVal {color: var(--accent);font-family: var(--mono);}
+
+.dash-threshold {font-weight: 400;color: var(--ink-muted);font-size: 0.78rem;}
+
+.dash-sliders input[type="range"] {width: 100%;accent-color: var(--accent);height: 4px;}
+
+.dash-ramp-row {display: flex;align-items: center;gap: 0.5rem;flex-wrap: wrap;margin-bottom: 1.25rem;}
+
+.dash-ramp-label {font-size: 0.82rem;color: var(--ink-muted);margin-right: 0.25rem;}
+
+.dash-ramp-btn {font-family: var(--mono);font-size: 0.78rem;padding: 0.4rem 0.8rem;border-radius: 6px;border: 1px solid var(--border);background: var(--bg);color: var(--ink-soft);cursor: pointer;transition: all 0.15s;}
+
+.dash-ramp-btn.active {background: var(--accent);border-color: var(--accent);color: white;}
+
+.dash-status {display: flex;align-items: center;gap: 0.6rem;font-size: 0.88rem;font-weight: 500;margin-bottom: 0.75rem;padding: 0.75rem 1rem;border-radius: 8px;background: var(--accent-light);color: var(--ink);}
+
+.dash-status.rolled-back { background: #FCE9E5; }
+
+.dash-status-dot {width: 9px;height: 9px;border-radius: 50%;flex-shrink: 0;}
+
+.dash-status-dot.pass { background: #1B6B45; }
+.dash-status-dot.fail { background: #C4402D; }
+
+.dash-exposure-bar {height: 8px;background: var(--tag-bg);border-radius: 4px;overflow: hidden;}
+
+.dash-exposure-fill {height: 100%;background: var(--accent);border-radius: 4px;transition: width 0.4s ease, background 0.3s ease;}
+
+.dash-exposure-fill.rolled-back { background: #C4402D; }
+
+@media (max-width: 640px) {
+  .dash-card { padding: 1.25rem; }
+  .dash-bar-seg span { display: none; }
+}
+
 @media (max-width: 768px) {
   .metric-strip { grid-template-columns: 1fr 1fr; }
   .container { padding: 0 1.25rem; }
@@ -244,6 +315,74 @@ rollout:
     </table>
   </section>
 
+  <section class="case-section" id="dashboard">
+    <div class="section-label">Interactive · Try It Yourself</div>
+    <h2>Timeline Compressor & Rollout Guardrail Simulator</h2>
+    <p>Two small interactive tools pulled from the case study's actual logic — the stage-by-stage timeline model from
+    <code class="inline">docs/before-after-timeline.md</code>, and the guardrail thresholds from
+    <code class="inline">pipeline/deployment/feature_flags.py</code>. Numbers are illustrative estimates, not real
+    Root data.</p>
+
+    <!-- TIMELINE COMPRESSOR -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <h3 class="dash-card-title">Feature-to-Production Timeline</h3>
+        <div class="dash-toggle" id="timelineToggle">
+          <button class="dash-toggle-btn active" data-mode="baseline">Baseline</button>
+          <button class="dash-toggle-btn" data-mode="proposed">Proposed</button>
+        </div>
+      </div>
+
+      <div class="dash-total-row">
+        <div class="dash-total-num" id="totalWeeks">14.0</div>
+        <div class="dash-total-label">total weeks, model-ready → live in production</div>
+      </div>
+
+      <div class="dash-bar" id="timelineBar"></div>
+
+      <div class="dash-legend" id="timelineLegend"></div>
+    </div>
+
+    <!-- ROLLOUT SIMULATOR -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <h3 class="dash-card-title">Feature-Flag Rollout Guardrail Simulator</h3>
+      </div>
+      <p style="font-size:0.85rem;color:var(--ink-muted);margin-bottom:1.25rem;">Simulates the automated rollback
+      logic: a filed, approved rate change ramps through exposure steps, and any guardrail breach rolls it back to
+      0% automatically — no manual intervention required.</p>
+
+      <div class="dash-sliders">
+        <div class="dash-slider-group">
+          <label class="dash-slider-label">Observed loss-ratio delta: <span id="lossRatioVal">3.0</span>%
+            <span class="dash-threshold">(guardrail: ≤ 5.0%)</span></label>
+          <input type="range" id="lossRatioSlider" min="-2" max="8" step="0.1" value="3">
+        </div>
+        <div class="dash-slider-group">
+          <label class="dash-slider-label">Observed conversion delta: <span id="conversionVal">-1.0</span>%
+            <span class="dash-threshold">(guardrail: ≥ -3.0%)</span></label>
+          <input type="range" id="conversionSlider" min="-6" max="2" step="0.1" value="-1">
+        </div>
+      </div>
+
+      <div class="dash-ramp-row">
+        <span class="dash-ramp-label">Exposure step:</span>
+        <button class="dash-ramp-btn" data-exposure="1">1%</button>
+        <button class="dash-ramp-btn" data-exposure="10">10%</button>
+        <button class="dash-ramp-btn" data-exposure="25">25%</button>
+        <button class="dash-ramp-btn active" data-exposure="100">100%</button>
+      </div>
+
+      <div class="dash-status" id="rolloutStatus">
+        <span class="dash-status-dot pass"></span>
+        <span id="rolloutStatusText">Guardrails passing — safe to hold at current exposure</span>
+      </div>
+      <div class="dash-exposure-bar">
+        <div class="dash-exposure-fill" id="exposureFill" style="width:100%"></div>
+      </div>
+    </div>
+  </section>
+
   <section class="case-section">
     <div class="section-label">04 · Measurable Outcomes</div>
     <h2>The KPI framework I'd bring to the roadmap conversation</h2>
@@ -323,6 +462,130 @@ mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: {
   lineColor: '#7A8FA0',
   fontFamily: 'DM Sans, sans-serif'
 }});
+
+/* ── TIMELINE COMPRESSOR ── */
+const timelineData = {
+  baseline: {
+    total: 14.0,
+    stages: [
+      { name: 'Model finalized', weeks: 2, color: '#1B6B93' },
+      { name: 'Manual handoff', weeks: 1, color: '#7A8FA0' },
+      { name: 'Actuarial review', weeks: 4, color: '#C4622D' },
+      { name: 'Eng. re-implementation', weeks: 1, color: '#0F1923' },
+      { name: 'QA/UAT', weeks: 1, color: '#3D4F5C' },
+      { name: 'Legal review', weeks: 0.5, color: '#1B6B45' },
+      { name: 'Regulatory filing', weeks: 3.5, color: '#1B6B45' },
+      { name: 'Deployment (100%)', weeks: 1, color: '#0F1923' },
+    ]
+  },
+  proposed: {
+    total: 5.0,
+    stages: [
+      { name: 'Model committed (versioned)', weeks: 2, color: '#1B6B93' },
+      { name: 'Automated validation (mins)', weeks: 0.1, color: '#7A8FA0' },
+      { name: 'Actuarial PR review', weeks: 1, color: '#C4622D' },
+      { name: 'Auto-filing draft (same day)', weeks: 0.1, color: '#1B6B45' },
+      { name: 'Filing + shadow deploy (parallel)', weeks: 1.3, color: '#1B6B45' },
+      { name: 'Flagged rollout', weeks: 0.5, color: '#0F1923' },
+    ]
+  }
+};
+
+function renderTimeline(mode) {
+  const data = timelineData[mode];
+  const bar = document.getElementById('timelineBar');
+  const legend = document.getElementById('timelineLegend');
+  const totalEl = document.getElementById('totalWeeks');
+
+  bar.innerHTML = '';
+  legend.innerHTML = '';
+
+  data.stages.forEach(stage => {
+    const pct = (stage.weeks / data.total) * 100;
+    const seg = document.createElement('div');
+    seg.className = 'dash-bar-seg';
+    seg.style.width = pct + '%';
+    seg.style.background = stage.color;
+    seg.title = `${stage.name}: ${stage.weeks} wk`;
+    if (pct > 8) {
+      seg.innerHTML = `<span>${stage.weeks}w</span>`;
+    }
+    bar.appendChild(seg);
+
+    const item = document.createElement('div');
+    item.className = 'dash-legend-item';
+    item.innerHTML = `<span class="dash-legend-dot" style="background:${stage.color}"></span>${stage.name} (${stage.weeks}w)`;
+    legend.appendChild(item);
+  });
+
+  totalEl.textContent = data.total.toFixed(1);
+}
+
+document.querySelectorAll('.dash-toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.dash-toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTimeline(btn.dataset.mode);
+  });
+});
+
+renderTimeline('baseline');
+
+/* ── ROLLOUT GUARDRAIL SIMULATOR ── */
+const GUARDRAILS = { maxLossRatioDelta: 5.0, minConversionDelta: -3.0 };
+let currentExposure = 100;
+
+const lossRatioSlider = document.getElementById('lossRatioSlider');
+const conversionSlider = document.getElementById('conversionSlider');
+const lossRatioVal = document.getElementById('lossRatioVal');
+const conversionVal = document.getElementById('conversionVal');
+const statusBox = document.getElementById('rolloutStatus');
+const statusText = document.getElementById('rolloutStatusText');
+const exposureFill = document.getElementById('exposureFill');
+
+function evaluateGuardrails() {
+  const lossRatioDelta = parseFloat(lossRatioSlider.value);
+  const conversionDelta = parseFloat(conversionSlider.value);
+  lossRatioVal.textContent = lossRatioDelta.toFixed(1);
+  conversionVal.textContent = conversionDelta.toFixed(1);
+
+  const lossOk = lossRatioDelta <= GUARDRAILS.maxLossRatioDelta;
+  const convOk = conversionDelta >= GUARDRAILS.minConversionDelta;
+  const passed = lossOk && convOk;
+
+  const dot = statusBox.querySelector('.dash-status-dot');
+
+  if (passed) {
+    statusBox.classList.remove('rolled-back');
+    dot.classList.remove('fail');
+    dot.classList.add('pass');
+    statusText.textContent = `Guardrails passing — holding at ${currentExposure}% exposure`;
+    exposureFill.classList.remove('rolled-back');
+    exposureFill.style.width = currentExposure + '%';
+  } else {
+    statusBox.classList.add('rolled-back');
+    dot.classList.remove('pass');
+    dot.classList.add('fail');
+    const reason = !lossOk ? 'loss-ratio guardrail breached' : 'conversion guardrail breached';
+    statusText.textContent = `Rolled back to 0% exposure — ${reason}`;
+    exposureFill.classList.add('rolled-back');
+    exposureFill.style.width = '100%';
+  }
+}
+
+lossRatioSlider.addEventListener('input', evaluateGuardrails);
+conversionSlider.addEventListener('input', evaluateGuardrails);
+
+document.querySelectorAll('.dash-ramp-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.dash-ramp-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentExposure = parseInt(btn.dataset.exposure);
+    evaluateGuardrails();
+  });
+});
+
+evaluateGuardrails();
 </script>
 
 </body>
