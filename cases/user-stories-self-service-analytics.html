@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>User Stories: Enterprise Data Integration &amp; Self-Service Analytics | Ade Okerinde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0F1923;
+  --ink-soft: #3D4F5C;
+  --ink-muted: #7A8FA0;
+  --bg: #F5F2ED;
+  --bg-card: #FDFCF9;
+  --accent: #1B6B93;
+  --accent-warm: #C4622D;
+  --accent-light: #E8F3F9;
+  --border: #DDD8D0;
+  --tag-bg: #EAE6DE;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {font-family: var(--sans);background: var(--bg);color: var(--ink);font-size: 16px;line-height: 1.65;}
+
+nav {position: sticky;top: 0; left: 0; right: 0;z-index: 100;padding: 1.1rem 2.5rem;display: flex;justify-content: space-between;align-items: center;background: rgba(245,242,237,0.9);backdrop-filter: blur(12px);border-bottom: 1px solid var(--border);}
+.nav-logo {font-family: var(--serif);font-size: 1.2rem;color: var(--ink);text-decoration: none;letter-spacing: -0.01em;}
+.back-link {font-size: 0.82rem;font-weight: 500;color: var(--accent);text-decoration: none;display: flex;align-items: center;gap: 0.4rem;}
+.back-link:hover { text-decoration: underline; }
+
+.container {max-width: 960px;margin: 0 auto;padding: 0 2.5rem;}
+
+/* HEADER */
+.case-header {padding: 5rem 0 3.5rem;}
+.case-eyebrow {font-family: var(--mono);font-size: 0.78rem;color: var(--accent);letter-spacing: 0.1em;text-transform: uppercase;margin-bottom: 1.25rem;display: flex;align-items: center;gap: 0.75rem;}
+.case-eyebrow::before {content: '';display: block;width: 32px;height: 1px;background: var(--accent);}
+.case-h1 {font-family: var(--serif);font-size: clamp(2.1rem, 5vw, 3rem);line-height: 1.1;letter-spacing: -0.02em;margin-bottom: 1.25rem;}
+.case-intro {font-size: 1.05rem;color: var(--ink-soft);max-width: 720px;margin-bottom: 2rem;}
+.case-tags {display: flex;flex-wrap: wrap;gap: 0.4rem;margin-bottom: 2rem;}
+.tag {font-family: var(--mono);font-size: 0.68rem;padding: 0.3rem 0.65rem;border-radius: 4px;background: var(--tag-bg);color: var(--ink-soft);letter-spacing: 0.04em;text-transform: uppercase;}
+.tag.accent { background: var(--accent-light); color: var(--accent); }
+
+.doc-meta {display: flex;flex-wrap: wrap;gap: 1.5rem;font-size: 0.82rem;color: var(--ink-muted);margin-bottom: 2rem;padding-bottom: 1.5rem;border-bottom: 1px solid var(--border);}
+.doc-meta strong { color: var(--ink-soft); }
+
+/* METRIC STRIP */
+.metric-strip {display: grid;grid-template-columns: repeat(4, 1fr);gap: 1rem;margin: 0 0 2.5rem;}
+.metric-box {background: var(--bg-card);border: 1px solid var(--border);border-radius: 10px;padding: 1.1rem;position: relative;overflow: hidden;}
+.metric-box::before {content: '';position: absolute;top: 0; left: 0;width: 3px;height: 100%;background: var(--accent);}
+.metric-box-num {font-family: var(--serif);font-size: 1.6rem;color: var(--ink);line-height: 1;margin-bottom: 0.25rem;}
+.metric-box-label {font-size: 0.72rem;color: var(--ink-muted);text-transform: uppercase;letter-spacing: 0.04em;}
+
+/* TOC */
+.toc {background: var(--bg-card);border: 1px solid var(--border);border-radius: 10px;padding: 1.25rem 1.5rem;margin-bottom: 1rem;}
+.toc-label {font-family: var(--mono);font-size: 0.7rem;color: var(--accent);text-transform: uppercase;letter-spacing: 0.06em;margin-bottom: 0.75rem;}
+.toc-list {list-style: none;columns: 2;column-gap: 1.5rem;}
+.toc-list li { margin-bottom: 0.45rem; font-size: 0.85rem; }
+.toc-list a { color: var(--ink-soft); text-decoration: none; }
+.toc-list a:hover { color: var(--accent); text-decoration: underline; }
+
+/* SECTIONS */
+.case-section { padding: 3rem 0; border-top: 1px solid var(--border); }
+.case-section:first-of-type { border-top: none; }
+.section-label {font-family: var(--mono);font-size: 0.75rem;color: var(--accent);text-transform: uppercase;letter-spacing: 0.1em;margin-bottom: 0.75rem;display: flex;align-items: center;gap: 0.5rem;}
+.section-label::before {content: '';display: inline-block;width: 20px;height: 1px;background: var(--accent);}
+.case-section h2 {font-family: var(--serif);font-size: clamp(1.5rem, 3vw, 2rem);letter-spacing: -0.01em;margin-bottom: 1.25rem;line-height: 1.15;}
+.case-section p { color: var(--ink-soft); margin-bottom: 1rem; font-size: 0.95rem; }
+.case-section ul { margin: 0 0 1rem 1.25rem; color: var(--ink-soft); font-size: 0.92rem; }
+.case-section li { margin-bottom: 0.4rem; }
+
+/* TABLE */
+.data-table {width: 100%;border-collapse: collapse;margin: 1.25rem 0;font-size: 0.85rem;background: var(--bg-card);border: 1px solid var(--border);border-radius: 10px;overflow: hidden;}
+.data-table th {background: var(--tag-bg);text-align: left;padding: 0.65rem 0.85rem;font-family: var(--mono);font-size: 0.7rem;text-transform: uppercase;letter-spacing: 0.04em;color: var(--ink-soft);}
+.data-table td {padding: 0.65rem 0.85rem;border-top: 1px solid var(--border);color: var(--ink-soft);vertical-align: top;}
+.data-table tr:nth-child(even) td { background: rgba(0,0,0,0.012); }
+
+/* EPIC > FEATURE > STORY HIERARCHY */
+.epic-block { margin-bottom: 2.5rem; }
+.epic-block:last-child { margin-bottom: 0; }
+.epic-head { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.35rem; flex-wrap: wrap; }
+.epic-id { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; background: var(--accent-light); padding: 0.15rem 0.5rem; border-radius: 4px; }
+.epic-title { font-family: var(--sans); font-weight: 600; font-size: 1.1rem; color: var(--ink); }
+.epic-desc { font-size: 0.85rem; color: var(--ink-muted); margin-bottom: 1.25rem; }
+
+.feature-block { margin: 0 0 1.75rem 0.5rem; padding-left: 1.1rem; border-left: 2px solid var(--border); }
+.feature-block:last-child { margin-bottom: 0; }
+.feature-head { display: flex; align-items: baseline; gap: 0.55rem; margin-bottom: 0.3rem; flex-wrap: wrap; }
+.feature-id { font-family: var(--mono); font-size: 0.66rem; color: var(--accent-warm); text-transform: uppercase; letter-spacing: 0.04em; background: #FDEEE6; padding: 0.12rem 0.45rem; border-radius: 4px; }
+.feature-title { font-weight: 600; font-size: 0.94rem; color: var(--ink); }
+.feature-desc { font-size: 0.8rem; color: var(--ink-muted); margin-bottom: 0.85rem; }
+
+.story-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.05rem 1.25rem; margin-bottom: 0.75rem; }
+.story-card:last-child { margin-bottom: 0; }
+.story-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.4rem; flex-wrap: wrap; }
+.story-id { font-family: var(--mono); font-size: 0.66rem; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.story-priority { font-family: var(--mono); font-size: 0.62rem; padding: 0.18rem 0.5rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.03em; flex-shrink: 0; font-weight: 600; }
+.story-priority.must { background: var(--accent-light); color: var(--accent); }
+.story-priority.should { background: #E6F4EF; color: #1B6B45; }
+.story-priority.could { background: #FDEEE6; color: var(--accent-warm); }
+.story-user { font-family: var(--mono); font-size: 0.66rem; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
+.story-text { font-size: 0.9rem; color: var(--ink); margin-bottom: 0.75rem; line-height: 1.55; }
+.ac-label { font-family: var(--mono); font-size: 0.64rem; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.45rem; }
+.ac-list { margin: 0; padding: 0; list-style: none; }
+.ac-list li { font-size: 0.82rem; color: var(--ink-soft); padding: 0.25rem 0 0.25rem 1.1rem; position: relative; margin-bottom: 0; }
+.ac-list li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: bold; font-size: 0.74rem; }
+
+.backlog-note { font-size: 0.85rem; color: var(--ink-muted); font-style: italic; margin-top: 1.25rem; }
+
+/* CAVEAT BOX */
+.caveat {border: 1.5px dashed var(--border);border-radius: 10px;padding: 1.1rem 1.25rem;font-size: 0.88rem;color: var(--ink-muted);margin: 1.5rem 0;}
+.caveat strong { color: var(--ink-soft); }
+
+/* CTA STRIP */
+.case-cta {background: var(--ink);color: white;padding: 3.5rem 0;text-align: center;margin-top: 2rem;}
+.case-cta h2 {font-family: var(--serif);font-size: clamp(1.6rem, 3vw, 2.2rem);margin-bottom: 0.75rem;}
+.case-cta p { color: rgba(255,255,255,0.65); margin-bottom: 1.5rem; }
+.cta-links {display: flex;justify-content: center;gap: 0.75rem;flex-wrap: wrap;}
+.contact-link {display: inline-flex;align-items: center;gap: 0.5rem;padding: 0.7rem 1.4rem;border-radius: 6px;font-size: 0.88rem;font-weight: 500;text-decoration: none;transition: all 0.2s;}
+.contact-link.light {background: rgba(255,255,255,0.1);color: white;border: 1px solid rgba(255,255,255,0.15);}
+.contact-link.light:hover { background: rgba(255,255,255,0.18); }
+.contact-link.accent {background: var(--accent);color: white;}
+.contact-link.accent:hover { background: #155778; }
+
+footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padding: 1.5rem 2.5rem;display: flex;justify-content: space-between;align-items: center;color: rgba(255,255,255,0.35);font-size: 0.78rem;}
+
+@media (max-width: 768px) {
+  .metric-strip { grid-template-columns: 1fr 1fr; }
+  .container { padding: 0 1.25rem; }
+  .case-header { padding: 3.5rem 0 2rem; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .toc-list { columns: 1; }
+  .feature-block { margin-left: 0.25rem; padding-left: 0.85rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Ade Okerinde</a>
+  <a href="../index.html#artifacts" class="back-link">← Back to artifacts</a>
+</nav>
+
+<div class="container">
+  <header class="case-header">
+    <div class="case-eyebrow">Portfolio Artifact · User Story Backlog</div>
+    <h1 class="case-h1">Enterprise Data Integration &amp; Self-Service Analytics</h1>
+    <p class="case-intro">The Epic → Feature → Story breakdown behind the self-service analytics rollout featured in
+    my case studies — consolidating fragmented marts, warehouses, and cloud sources into a governed layer that
+    business and operational users could query directly, without going through the central reporting team for every
+    request. Company- and system-specific details are illustrative; the Epic-Feature-Story structure, acceptance
+    criteria style, and prioritization approach reflect how I actually break down a backlog.</p>
+    <div class="case-tags">
+      <span class="tag accent">Data Platform</span>
+      <span class="tag">Self-Service Analytics</span>
+      <span class="tag">Data Governance</span>
+      <span class="tag">Enterprise Integration</span>
+    </div>
+
+    <div class="doc-meta">
+      <span><strong>Author:</strong> Ade Okerinde, Product Manager</span>
+      <span><strong>Status:</strong> Shipped</span>
+      <span><strong>Prioritization:</strong> MoSCoW</span>
+    </div>
+
+    <div class="metric-strip">
+      <div class="metric-box"><div class="metric-box-num">22%</div><div class="metric-box-label">Reporting accuracy lift</div></div>
+      <div class="metric-box"><div class="metric-box-num">3</div><div class="metric-box-label">Epics</div></div>
+      <div class="metric-box"><div class="metric-box-num">6</div><div class="metric-box-label">Features</div></div>
+      <div class="metric-box"><div class="metric-box-num">12</div><div class="metric-box-label">Sample stories shown</div></div>
+    </div>
+
+    <div class="toc">
+      <div class="toc-label">Contents</div>
+      <ul class="toc-list">
+        <li><a href="#background">1. Background</a></li>
+        <li><a href="#users">2. Primary users</a></li>
+        <li><a href="#backlog">3. Epic → Feature → Story backlog</a></li>
+        <li><a href="#dor-dod">4. Definition of Ready / Done</a></li>
+        <li><a href="#priority-summary">5. Priority summary</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="case-section" id="background">
+    <div class="section-label">01 · Background</div>
+    <h2>Why this backlog exists</h2>
+    <p>Data lived across disconnected marts, warehouses, and cloud platforms, so business and operational users
+    couldn't trust reporting or self-serve answers without routing every request through a central data/BI team.
+    That team became a bottleneck not because the requests were hard, but because there was no governed, trusted
+    layer non-technical users could query directly. This backlog structures the work to fix that: consolidate the
+    sources, build a governed semantic layer on top, then hand business users a self-service experience they can
+    trust without a ticket queue in between.</p>
+  </section>
+
+  <section class="case-section" id="users">
+    <div class="section-label">02 · Primary Users</div>
+    <h2>Who this backlog serves</h2>
+    <table class="data-table">
+      <tr><th>User</th><th>Primary need</th></tr>
+      <tr><td>Business Analyst (self-service consumer)</td><td>Build their own reports on trusted, certified data without waiting on the central BI team</td></tr>
+      <tr><td>Operations Manager</td><td>Real-time visibility into team/departmental metrics without a recurring manual report request</td></tr>
+      <tr><td>Data Engineer</td><td>A single governed pipeline to maintain instead of N one-off integrations per report request</td></tr>
+      <tr><td>BI/Data Governance Lead</td><td>Certified, standardized metric definitions so "revenue" or "cycle time" means the same thing everywhere</td></tr>
+      <tr><td>Central Reporting Team</td><td>Reduced ad hoc request volume so the team can focus on higher-value analysis work</td></tr>
+    </table>
+  </section>
+
+  <section class="case-section" id="backlog">
+    <div class="section-label">03 · Backlog</div>
+    <h2>Epic → Feature → Story, with acceptance criteria</h2>
+    <p>Three epics structured the rollout: build the unified integration layer, enable the self-service experience
+    on top of it, and drive adoption while proving the central team's workload actually dropped. Each epic breaks
+    into features, and each feature into backlog-ready stories.</p>
+
+    <div class="epic-block">
+      <div class="epic-head"><span class="epic-id">Epic 1</span><span class="epic-title">Unified Data Integration Layer</span></div>
+      <div class="epic-desc">Consolidate marts, warehouses, and cloud sources into a single governed pipeline with standardized definitions.</div>
+
+      <div class="feature-block">
+        <div class="feature-head"><span class="feature-id">Feature 1.1</span><span class="feature-title">Cross-Source Pipeline Consolidation</span></div>
+        <div class="feature-desc">Replace point-to-point integrations with a single governed ingestion pipeline.</div>
+
+        <div class="story-card">
+          <div class="story-head"><span class="story-id">1.1.1</span><span class="story-priority must">Must</span></div>
+          <div class="story-user">Primary user: Data Engineer</div>
+          <p class="story-text">As a <strong>Data Engineer</strong>, I want all source marts, warehouses, and cloud platforms consolidated into a single governed ingestion pipeline, so that I maintain one pipeline instead of a growing set of one-off integrations per report request.</p>
+          <div class="ac-label">Acceptance Criteria</div>
+          <ul class="ac-list">
+            <li>Given a new source system is onboarded, when it is connected, then it flows through the same governed ingestion pipeline as existing sources rather than a bespoke integration.</li>
+            <li>Given the pipeline runs on schedule, when it completes, then ingestion success/failure and row-level reconciliation counts are logged for every source.</li>
+          </ul>
+        </div>
+
+        <div class="story-card">
+          <div class="story-head"><span class="story-id">1.1.2</span><span class="story-priority must">Must</span></div>
+          <div class="story-user">Primary user: Data Engineer</div>
+          <p class="story-text">As a <strong>Data Engineer</strong>, I want automated data quality validation on every ingestion run, so that bad data is caught before it reaches a business user's report.</p>
+          <div class="ac-label">Acceptance Criteria</div>
+          <ul class="ac-list">
+            <li>Given data is ingested, when validation rules run, then schema conformance, null-rate thresholds, and referential integrity are checked automatically.</li>
+            <li>Given a validation rule fails, when the failure is detected, then downstream datasets built from that source are flagged as stale rather than silently updated with bad data.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-head"><span class="feature-id">Feature 1.2</span><span class="feature-title">Semantic Layer &amp; Governance</span></div>
+        <div class="feature-desc">Standardize metric definitions so the same term means the same thing across every report.</div>
+
+        <div class="story-card">
+          <div class="story-head"><span class="story-id">1.2.1</span><span class="story-priority must">Must</span></div>
+          <div class="story-user">Primary user: BI/Data Governance Lead</div>
+          <p class="story-text">As a <strong>BI/Data Governance Lead</strong>, I want a certified semantic layer with standardized metric definitions, so that "cycle time" or "revenue" means the same thing regardless of which report a user builds.</p>
+          <div class="ac-label">Acceptance Criteria</div>
+          <ul class="ac-list">
+            <li>Given a metric is defined in the semantic layer, when it is published, then it carries a single owner, definition, and calculation logic visible to all consumers.</li>
+            <li>Given two reports reference the same certified metric, when compared, then they return identical values for the same filter context.</li>
+          </ul>
+        </div>
+
+        <div class="story-card">
+          <div class="story-head"><span class="story-id">1.2.2</span><span class="story-priority should">Should</span></div>
+          <div class="story-user">Primary user: Business Analyst</div>
+          <p class="story-text">As a <strong>Business Analyst</strong>, I want to see data lineage for any certified dataset, so that I can confirm where a number comes from before I present it.</p>
+          <div class="ac-label">Acceptance Criteria</div>
+          <ul class="ac-list">
+            <li>Given a certified dataset, when a user views its details, then source system(s), last refresh time, and transformation summary are displayed.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="epic-block">
+      <div class="epic-head"><span class="epic-id">Epic 2</span><span class="epic-title">Self-Service Reporting Enablement</span></div>
+      <div class="epic-desc">Give business users a governed workspace to build their own reports on certified data.</div>
+
+      <div class="feature-block">
+        <div class="feature-head"><span class="feature-id">Feature 2.1</span><span class="feature-title">Governed Self-Service Workspace</span></div>
+        <div class="feature-desc">Role-based access to certified datasets, without exposing raw source systems.</div>
+
+        <div class="story-card">
+          <div class="story-head"><span class="story-id">2.1.1</span><span class="story-priority must">Must</span></div>
+          <div class="story-user">Primary user: Business Analyst</div>
+          <p class="story-text">As a <strong>Business Analyst</strong>, I want role-based access to a workspace of certified datasets relevant to my department, so that I can build reports without waiting on a data request ticket.</p>
+          <div class="ac-label">Acceptance Criteria</div>
+          <ul class="ac-list">
+            <li>Given a user is assigned a department role, when they log into the workspace, then they see only the certified datasets relevant to that role.</li>
+            <li>Given a user attempts to access a dataset outside their role, when the request is made, then access is denied with a clear explanation and request path.</li>
+          </ul>
+        </div>
+
+        <div class="story-card">
+          <div class="story-head"><span class="story-id">2.1.2</span><span class="story-priority should">Should</span></div>
+          <div class="story-user">Primary user: Business Analyst</div>
+          <p class="story-text">As a <strong>Business Analyst</strong>, I want a searchable library of certified datasets with descriptions, so that I can find the right dataset without asking the BI team what exists.</p>
+          <div class="ac-label">Acceptance Criteria</div>
+          <ul class="ac-list">
+            <li>Given the dataset library, when a user searches by keyword, then matching datasets return with owner, description, and last-refresh metadata.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-head"><span class="feature-id">Feature 2.2</span><span class="feature-title">Ad Hoc Report Builder Experience</span></div>
+        <div class="feature-desc">Let users build and share reports without writing SQL.</div>
+
+        <div class="story-card">
+          <div class="story-head"><span class="story-id">2.2.1</span><span class="story-priority must">Must</span></div>
+          <div class="story-user">Primary user: Business Analyst</div>
+          <p class="story-text">As a <strong>Business Analyst</strong>, I want a drag-and-drop report builder on top of certified datasets, so that I can create a report without writing SQL or involving engineering.</p>
+          <div class="ac-label">Acceptance Criteria</div>
+          <ul class="ac-list">
+            <li>Given a certified dataset, when a user drags fields into the builder, then a report renders using only pre-validated, governed fields.</li>
+            <li>Given a report is built, when the user saves it, then it can be shared with defined role-based permissions.</li>
+          </ul>
+        </div>
+
+        <div class="story-card">
+          <div class="story-head"><span class="story-id">2.2.2</span><span class="story-priority could">Could</span></div>
+          <div class="story-user">Primary user: Operations Manager</div>
+          <p class="story-text">As an <strong>Operations Manager</strong>, I want guided templates for common report types (trend, comparison, breakdown), so that I don't start every report from a blank canvas.</p>
+          <div class="ac-label">Acceptance Criteria</div>
+          <ul class="ac-list">
+            <li>Given the report builder, when a user selects a template, then it pre-configures a starting layout mapped to the user's available certified fields.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="epic-block">
+      <div class="epic-head"><span class="epic-id">Epic 3</span><span class="epic-title">Adoption, Trust &amp; Reduced Central-Team Dependency</span></div>
+      <div class="epic-desc">Drive adoption and prove the central reporting team's ad hoc request volume actually dropped.</div>
+
+      <div class="feature-block">
+        <div class="feature-head"><span class="feature-id">Feature 3.1</span><span class="feature-title">Training &amp; Enablement</span></div>
+        <div class="feature-desc">Get users comfortable self-serving instead of defaulting to a request ticket.</div>
+
+        <div class="story-card">
+          <div class="story-head"><span class="story-id">3.1.1</span><span class="story-priority should">Should</span></div>
+          <div class="story-user">Primary user: Business Analyst</div>
+          <p class="story-text">As a <strong>Business Analyst</strong>, I want hands-on onboarding and a champions network, so that I feel confident building my own reports instead of defaulting to a data request ticket.</p>
+          <div class="ac-label">Acceptance Criteria</div>
+          <ul class="ac-list">
+            <li>Given a new workspace user, when they are onboarded, then they complete a guided walkthrough and are assigned a department champion contact.</li>
+          </ul>
+        </div>
+
+        <div class="story-card">
+          <div class="story-head"><span class="story-id">3.1.2</span><span class="story-priority could">Could</span></div>
+          <div class="story-user">Primary user: Business Analyst</div>
+          <p class="story-text">As a <strong>Business Analyst</strong>, I want in-product help and documentation linked to each certified dataset, so that I can resolve questions without filing a support ticket.</p>
+          <div class="ac-label">Acceptance Criteria</div>
+          <ul class="ac-list">
+            <li>Given a certified dataset, when a user clicks help, then contextual documentation and example reports are shown.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-head"><span class="feature-id">Feature 3.2</span><span class="feature-title">Usage Monitoring &amp; Trust Signals</span></div>
+        <div class="feature-desc">Prove adoption is real and that users can trust what they're looking at.</div>
+
+        <div class="story-card">
+          <div class="story-head"><span class="story-id">3.2.1</span><span class="story-priority must">Must</span></div>
+          <div class="story-user">Primary user: Central Reporting Team</div>
+          <p class="story-text">As a member of the <strong>Central Reporting Team</strong>, I want a usage dashboard showing self-service adoption and ad hoc request volume over time, so that we can demonstrate the initiative actually reduced our request queue.</p>
+          <div class="ac-label">Acceptance Criteria</div>
+          <ul class="ac-list">
+            <li>Given self-service usage occurs, when the dashboard refreshes, then active users, reports built, and dataset query volume are tracked weekly.</li>
+            <li>Given ad hoc request tickets are logged, when compared over time, then the dashboard shows request volume trending against self-service adoption.</li>
+          </ul>
+        </div>
+
+        <div class="story-card">
+          <div class="story-head"><span class="story-id">3.2.2</span><span class="story-priority should">Should</span></div>
+          <div class="story-user">Primary user: Business Analyst</div>
+          <p class="story-text">As a <strong>Business Analyst</strong>, I want a visible data-freshness indicator on every report, so that I know whether I'm looking at current data before I share it.</p>
+          <div class="ac-label">Acceptance Criteria</div>
+          <ul class="ac-list">
+            <li>Given a report is opened, when it renders, then the underlying dataset's last-refresh timestamp is displayed alongside the report.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <p class="backlog-note">These 12 stories are a representative sample of the full backlog used to run this initiative; the remainder followed the same Epic-Feature-Story structure across additional domains and edge cases.</p>
+  </section>
+
+  <section class="case-section" id="dor-dod">
+    <div class="section-label">04 · Definition of Ready / Done</div>
+    <h2>How a story moved through the backlog</h2>
+    <div class="scope-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;">
+      <div class="scope-box in" style="background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.4rem;">
+        <h4 style="font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem;color:var(--accent);">Definition of Ready</h4>
+        <ul style="margin:0;padding-left:1.1rem;">
+          <li style="font-size:0.85rem;margin-bottom:0.4rem;">Story has a clear user, need, and benefit statement</li>
+          <li style="font-size:0.85rem;margin-bottom:0.4rem;">Acceptance criteria are written and reviewed by engineering</li>
+          <li style="font-size:0.85rem;margin-bottom:0.4rem;">Dependencies on other stories/features are identified</li>
+          <li style="font-size:0.85rem;margin-bottom:0.4rem;">MoSCoW priority assigned relative to the current release</li>
+        </ul>
+      </div>
+      <div class="scope-box out" style="background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.4rem;">
+        <h4 style="font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem;color:var(--ink-muted);">Definition of Done</h4>
+        <ul style="margin:0;padding-left:1.1rem;">
+          <li style="font-size:0.85rem;margin-bottom:0.4rem;">All acceptance criteria pass in QA and UAT</li>
+          <li style="font-size:0.85rem;margin-bottom:0.4rem;">Data quality/validation checks pass for any new dataset touched</li>
+          <li style="font-size:0.85rem;margin-bottom:0.4rem;">Documentation or in-product help updated where applicable</li>
+          <li style="font-size:0.85rem;margin-bottom:0.4rem;">Usage tracking is in place before the story is considered adopted, not just shipped</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="priority-summary">
+    <div class="section-label">05 · Priority Summary</div>
+    <h2>How the sample backlog broke down</h2>
+    <table class="data-table">
+      <tr><th>Priority</th><th>Story count (sample)</th><th>Focus</th></tr>
+      <tr><td>Must</td><td>6</td><td>Core integration pipeline, governed semantic layer, workspace access, report builder, adoption tracking</td></tr>
+      <tr><td>Should</td><td>4</td><td>Lineage visibility, dataset discovery, onboarding, freshness indicators</td></tr>
+      <tr><td>Could</td><td>2</td><td>Guided templates, in-product help — valuable but deferrable without blocking core value</td></tr>
+    </table>
+    <div class="caveat">
+      <strong>Why so few "Won't haves" in this sample:</strong> the full backlog included several explicitly
+      descoped items (e.g., natural-language query, cross-tenant dataset sharing) that aren't shown here since the
+      sample above focuses on what shipped, not the full negotiation record.
+    </div>
+  </section>
+</div>
+
+<div class="case-cta">
+  <h2>Want the full backlog or dependency map?</h2>
+  <p>Happy to walk through the complete Epic-Feature-Story tree, sequencing, and rollout detail.</p>
+  <div class="cta-links">
+    <a href="mailto:addieokerinde@gmail.com" class="contact-link accent">✉ Get in touch</a>
+    <a href="../index.html#artifacts" class="contact-link light">← All artifacts</a>
+  </div>
+</div>
+
+<footer>
+  <span>© <span id="year"></span> Ade Okerinde</span>
+  <span>Product Manager · AI Product Owner · CSPO · CSM</span>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
