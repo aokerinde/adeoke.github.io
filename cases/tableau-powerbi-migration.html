@@ -88,6 +88,44 @@ nav {position: sticky;top: 0; left: 0; right: 0;z-index: 100;padding: 1.1rem 2.5
 
 footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padding: 1.5rem 2.5rem;display: flex;justify-content: space-between;align-items: center;color: rgba(255,255,255,0.35);font-size: 0.78rem;}
 
+/* ── INTERACTIVE ROADMAP ── */
+.dash-card {background: var(--bg-card);border: 1px solid var(--border);border-radius: 14px;padding: 1.75rem;margin: 1.5rem 0 2rem;}
+
+.roadmap-stepper {display: flex;flex-wrap: wrap;align-items: center;gap: 0;margin-bottom: 1.5rem;}
+
+.roadmap-node {width: 2.3rem;height: 2.3rem;border-radius: 50%;border: 1.5px solid var(--border);background: var(--bg);color: var(--ink-soft);font-family: var(--mono);font-size: 0.8rem;font-weight: 600;cursor: pointer;display: flex;align-items: center;justify-content: center;transition: all 0.2s;flex-shrink: 0;}
+
+.roadmap-node:hover { border-color: var(--accent); color: var(--accent); }
+
+.roadmap-node.active {background: var(--accent);border-color: var(--accent);color: white;transform: scale(1.08);}
+
+.roadmap-node.done { border-color: var(--accent); color: var(--accent); }
+
+.roadmap-connector {width: 1.1rem;height: 2px;background: var(--border);flex-shrink: 0;transition: background 0.2s;}
+
+.roadmap-connector.active { background: var(--accent); }
+
+.roadmap-nav-row {display: flex;justify-content: space-between;align-items: center;margin-bottom: 1rem;}
+
+.roadmap-nav-btn {font-family: var(--sans);font-size: 0.8rem;font-weight: 500;padding: 0.45rem 0.9rem;border-radius: 6px;border: 1px solid var(--border);background: var(--bg);color: var(--ink-soft);cursor: pointer;transition: all 0.15s;}
+
+.roadmap-nav-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+
+.roadmap-nav-btn:disabled { opacity: 0.4; cursor: default; }
+
+.roadmap-detail {background: var(--bg);border: 1px solid var(--border);border-radius: 10px;padding: 1.25rem 1.5rem;}
+
+.roadmap-detail-owner {font-family: var(--mono);font-size: 0.7rem;color: var(--accent);text-transform: uppercase;letter-spacing: 0.06em;margin-bottom: 0.5rem;}
+
+.roadmap-detail-title {font-family: var(--sans);font-weight: 600;font-size: 1.05rem;margin-bottom: 0.5rem;color: var(--ink);}
+
+.roadmap-detail-desc {font-size: 0.9rem;color: var(--ink-soft);margin: 0;}
+
+@media (max-width: 640px) {
+  .roadmap-connector { display: none; }
+  .roadmap-node { margin: 0.15rem; }
+}
+
 @media (max-width: 768px) {
   .metric-strip { grid-template-columns: 1fr 1fr; }
   .container { padding: 0 1.25rem; }
@@ -167,6 +205,25 @@ footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padd
     </table>
   </section>
 
+  <section class="case-section" id="interactive-roadmap">
+    <div class="section-label">Interactive · Try It Yourself</div>
+    <h2>Click through the migration roadmap</h2>
+    <p>The same ten stages from the workflow below, as a click-through roadmap — step through in order or jump to any
+    stage to see its owner and exit criteria.</p>
+    <div class="dash-card">
+      <div class="roadmap-stepper" id="roadmapStepper"></div>
+      <div class="roadmap-nav-row">
+        <button class="roadmap-nav-btn" id="roadmapPrev">← Previous</button>
+        <button class="roadmap-nav-btn" id="roadmapNext">Next →</button>
+      </div>
+      <div class="roadmap-detail">
+        <div class="roadmap-detail-owner" id="roadmapOwner"></div>
+        <h3 class="roadmap-detail-title" id="roadmapTitle"></h3>
+        <p class="roadmap-detail-desc" id="roadmapDesc"></p>
+      </div>
+    </div>
+  </section>
+
   <section class="case-section">
     <div class="section-label">04 · Migration Workflow</div>
     <h2>From license procurement to Tableau decommissioning</h2>
@@ -223,6 +280,64 @@ footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padd
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ── INTERACTIVE MIGRATION ROADMAP ── */
+const roadmapStages = [
+  { owner: 'Product Manager + Finance', title: '1. Business case & license procurement', desc: 'Build cost-comparison business case (Tableau renewal vs. Power BI), secure budget approval, procure Power BI Pro/Premium licenses.' },
+  { owner: 'Product Manager + Data Analysts', title: '2. Inventory & wave planning', desc: 'Catalog all 120+ Tableau reports; tag by usage, business criticality, and complexity; group into a prioritized, wave-based rollout roadmap.' },
+  { owner: 'Data Architect + Database Manager', title: '3. Governance & security design', desc: 'Define target semantic model standards, row-level security, workspace/naming conventions, and source database access permissions.' },
+  { owner: 'SQL Developers + Data Architect', title: '4. Data pipeline re-engineering', desc: 'Rebuild and optimize queries and stored procedures feeding Power BI datasets.' },
+  { owner: 'C# Developers', title: '5. Custom integration & automation', desc: 'Build custom connectors, embedded-analytics integrations, and scheduled refresh/automation tooling.' },
+  { owner: 'Data Analysts + Developers', title: '6. Report rebuild', desc: 'Recreate dashboards and data models natively in Power BI, wave by wave.' },
+  { owner: 'Data Analysts + Data Scientists', title: '7. Data parity validation', desc: 'Reconcile Power BI output against Tableau source; sign off on standard and statistical/predictive visual parity.' },
+  { owner: 'Product Manager', title: '8. Training & change management', desc: 'Run hands-on training, office hours, and a champions network to drive adoption ahead of cutover.' },
+  { owner: 'Product Manager + Developers', title: '9. Wave cutover', desc: 'Go live per wave, redirect users to Power BI, monitor adoption and performance.' },
+  { owner: 'Product Manager + Database Manager', title: '10. Tableau license decommissioning', desc: 'Confirm zero remaining dependency per wave, sunset the corresponding Tableau licenses, and track realized cost savings through to full decommission.' },
+];
+
+let currentStage = 0;
+const stepper = document.getElementById('roadmapStepper');
+const ownerEl = document.getElementById('roadmapOwner');
+const titleEl = document.getElementById('roadmapTitle');
+const descEl = document.getElementById('roadmapDesc');
+const prevBtn = document.getElementById('roadmapPrev');
+const nextBtn = document.getElementById('roadmapNext');
+
+function renderStepper() {
+  stepper.innerHTML = '';
+  roadmapStages.forEach((stage, i) => {
+    const node = document.createElement('button');
+    node.className = 'roadmap-node';
+    if (i === currentStage) node.classList.add('active');
+    else if (i < currentStage) node.classList.add('done');
+    node.textContent = i + 1;
+    node.setAttribute('aria-label', stage.title);
+    node.addEventListener('click', () => { currentStage = i; update(); });
+    stepper.appendChild(node);
+
+    if (i < roadmapStages.length - 1) {
+      const connector = document.createElement('div');
+      connector.className = 'roadmap-connector';
+      if (i < currentStage) connector.classList.add('active');
+      stepper.appendChild(connector);
+    }
+  });
+}
+
+function update() {
+  const stage = roadmapStages[currentStage];
+  ownerEl.textContent = stage.owner;
+  titleEl.textContent = stage.title;
+  descEl.textContent = stage.desc;
+  prevBtn.disabled = currentStage === 0;
+  nextBtn.disabled = currentStage === roadmapStages.length - 1;
+  renderStepper();
+}
+
+prevBtn.addEventListener('click', () => { if (currentStage > 0) { currentStage--; update(); } });
+nextBtn.addEventListener('click', () => { if (currentStage < roadmapStages.length - 1) { currentStage++; update(); } });
+
+update();
 </script>
 
 </body>

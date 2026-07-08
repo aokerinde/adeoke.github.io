@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Artifact: Outcome-Based Product Roadmap Framework | Ade Okerinde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0F1923;
+  --ink-soft: #3D4F5C;
+  --ink-muted: #7A8FA0;
+  --bg: #F5F2ED;
+  --bg-card: #FDFCF9;
+  --accent: #1B6B93;
+  --accent-warm: #C4622D;
+  --accent-light: #E8F3F9;
+  --border: #DDD8D0;
+  --tag-bg: #EAE6DE;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {font-family: var(--sans);background: var(--bg);color: var(--ink);font-size: 16px;line-height: 1.65;}
+
+nav {position: sticky;top: 0; left: 0; right: 0;z-index: 100;padding: 1.1rem 2.5rem;display: flex;justify-content: space-between;align-items: center;background: rgba(245,242,237,0.9);backdrop-filter: blur(12px);border-bottom: 1px solid var(--border);}
+.nav-logo {font-family: var(--serif);font-size: 1.2rem;color: var(--ink);text-decoration: none;letter-spacing: -0.01em;}
+.back-link {font-size: 0.82rem;font-weight: 500;color: var(--accent);text-decoration: none;display: flex;align-items: center;gap: 0.4rem;}
+.back-link:hover { text-decoration: underline; }
+
+.container {max-width: 960px;margin: 0 auto;padding: 0 2.5rem;}
+
+/* HEADER */
+.case-header {padding: 5rem 0 3.5rem;}
+.case-eyebrow {font-family: var(--mono);font-size: 0.78rem;color: var(--accent);letter-spacing: 0.1em;text-transform: uppercase;margin-bottom: 1.25rem;display: flex;align-items: center;gap: 0.75rem;}
+.case-eyebrow::before {content: '';display: block;width: 32px;height: 1px;background: var(--accent);}
+.case-h1 {font-family: var(--serif);font-size: clamp(2.2rem, 5vw, 3.2rem);line-height: 1.08;letter-spacing: -0.02em;margin-bottom: 1.25rem;}
+.case-intro {font-size: 1.05rem;color: var(--ink-soft);max-width: 720px;margin-bottom: 2rem;}
+.case-tags {display: flex;flex-wrap: wrap;gap: 0.4rem;margin-bottom: 2rem;}
+.tag {font-family: var(--mono);font-size: 0.68rem;padding: 0.3rem 0.65rem;border-radius: 4px;background: var(--tag-bg);color: var(--ink-soft);letter-spacing: 0.04em;text-transform: uppercase;}
+.tag.accent { background: var(--accent-light); color: var(--accent); }
+
+/* METRIC STRIP */
+.metric-strip {display: grid;grid-template-columns: repeat(4, 1fr);gap: 1rem;margin: 2.5rem 0;}
+.metric-box {background: var(--bg-card);border: 1px solid var(--border);border-radius: 10px;padding: 1.1rem;position: relative;overflow: hidden;}
+.metric-box::before {content: '';position: absolute;top: 0; left: 0;width: 3px;height: 100%;background: var(--accent);}
+.metric-box-num {font-family: var(--serif);font-size: 1.6rem;color: var(--ink);line-height: 1;margin-bottom: 0.25rem;}
+.metric-box-label {font-size: 0.72rem;color: var(--ink-muted);text-transform: uppercase;letter-spacing: 0.04em;}
+
+/* SECTIONS */
+.case-section { padding: 3rem 0; border-top: 1px solid var(--border); }
+.case-section:first-of-type { border-top: none; }
+.section-label {font-family: var(--mono);font-size: 0.75rem;color: var(--accent);text-transform: uppercase;letter-spacing: 0.1em;margin-bottom: 0.75rem;display: flex;align-items: center;gap: 0.5rem;}
+.section-label::before {content: '';display: inline-block;width: 20px;height: 1px;background: var(--accent);}
+.case-section h2 {font-family: var(--serif);font-size: clamp(1.5rem, 3vw, 2rem);letter-spacing: -0.01em;margin-bottom: 1.25rem;line-height: 1.15;}
+.case-section p { color: var(--ink-soft); margin-bottom: 1rem; font-size: 0.95rem; }
+
+/* TABLE */
+.data-table {width: 100%;border-collapse: collapse;margin: 1.25rem 0;font-size: 0.85rem;background: var(--bg-card);border: 1px solid var(--border);border-radius: 10px;overflow: hidden;}
+.data-table th {background: var(--tag-bg);text-align: left;padding: 0.65rem 0.85rem;font-family: var(--mono);font-size: 0.7rem;text-transform: uppercase;letter-spacing: 0.04em;color: var(--ink-soft);}
+.data-table td {padding: 0.65rem 0.85rem;border-top: 1px solid var(--border);color: var(--ink-soft);vertical-align: top;}
+.data-table tr:nth-child(even) td { background: rgba(0,0,0,0.012); }
+
+/* CTA STRIP */
+.case-cta {background: var(--ink);color: white;padding: 3.5rem 0;text-align: center;margin-top: 2rem;}
+.case-cta h2 {font-family: var(--serif);font-size: clamp(1.6rem, 3vw, 2.2rem);margin-bottom: 0.75rem;}
+.case-cta p { color: rgba(255,255,255,0.65); margin-bottom: 1.5rem; }
+.cta-links {display: flex;justify-content: center;gap: 0.75rem;flex-wrap: wrap;}
+.contact-link {display: inline-flex;align-items: center;gap: 0.5rem;padding: 0.7rem 1.4rem;border-radius: 6px;font-size: 0.88rem;font-weight: 500;text-decoration: none;transition: all 0.2s;}
+.contact-link.light {background: rgba(255,255,255,0.1);color: white;border: 1px solid rgba(255,255,255,0.15);}
+.contact-link.light:hover { background: rgba(255,255,255,0.18); }
+.contact-link.accent {background: var(--accent);color: white;}
+.contact-link.accent:hover { background: #155778; }
+
+footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padding: 1.5rem 2.5rem;display: flex;justify-content: space-between;align-items: center;color: rgba(255,255,255,0.35);font-size: 0.78rem;}
+
+/* ── DASHBOARD / INTERACTIVE ── */
+.dash-card {background: var(--bg-card);border: 1px solid var(--border);border-radius: 14px;padding: 1.75rem;margin: 1.5rem 0 2rem;}
+.dash-card-header {display: flex;justify-content: space-between;align-items: center;flex-wrap: wrap;gap: 0.75rem;margin-bottom: 1.25rem;}
+.dash-card-title {font-family: var(--serif);font-size: 1.15rem;letter-spacing: -0.01em;}
+.dash-toggle {display: inline-flex;background: var(--tag-bg);border-radius: 8px;padding: 0.2rem;gap: 0.2rem;}
+.dash-toggle-btn {font-family: var(--sans);font-size: 0.8rem;font-weight: 500;padding: 0.45rem 0.9rem;border-radius: 6px;border: none;background: transparent;color: var(--ink-soft);cursor: pointer;transition: all 0.2s;}
+.dash-toggle-btn.active {background: var(--accent);color: white;}
+.dash-note {font-size: 0.85rem;color: var(--ink-muted);margin-bottom: 1.25rem;}
+
+/* Theme filter chips */
+.chip-row {display: flex;flex-wrap: wrap;gap: 0.5rem;margin-bottom: 1.25rem;}
+.chip {font-family: var(--mono);font-size: 0.72rem;padding: 0.35rem 0.8rem;border-radius: 999px;border: 1px solid var(--border);background: var(--bg);color: var(--ink-soft);cursor: pointer;transition: all 0.15s;text-transform: uppercase;letter-spacing: 0.03em;}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+/* Quarter board */
+.quarter-board {display: grid;grid-template-columns: repeat(4, 1fr);gap: 0.85rem;}
+.quarter-col-head {font-family: var(--mono);font-size: 0.75rem;color: var(--accent);text-transform: uppercase;letter-spacing: 0.06em;margin-bottom: 0.6rem;padding-bottom: 0.5rem;border-bottom: 1px solid var(--border);}
+.quarter-col { min-height: 40px; }
+.initiative-card {background: var(--bg);border: 1px solid var(--border);border-radius: 8px;padding: 0.7rem 0.8rem;margin-bottom: 0.6rem;transition: opacity 0.15s;}
+.initiative-card.hidden { display: none; }
+.initiative-theme-dot {display: inline-block;width: 7px;height: 7px;border-radius: 50%;margin-right: 0.4rem;}
+.initiative-title {font-size: 0.82rem;font-weight: 600;color: var(--ink);margin-bottom: 0.2rem;}
+.initiative-outcome {font-size: 0.76rem;color: var(--ink-muted);}
+.initiative-exec-outcome {font-size: 0.82rem;color: var(--ink-soft);}
+
+/* RICE calculator */
+.rice-form {display: grid;grid-template-columns: repeat(4, 1fr);gap: 0.75rem;margin-bottom: 1rem;}
+.rice-field { display: flex; flex-direction: column; gap: 0.3rem; }
+.rice-field label {font-size: 0.72rem;color: var(--ink-muted);text-transform: uppercase;letter-spacing: 0.03em;}
+.rice-field input, .rice-field select {font-family: var(--sans);font-size: 0.88rem;padding: 0.5rem 0.6rem;border-radius: 6px;border: 1px solid var(--border);background: var(--bg);color: var(--ink);}
+.rice-add-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: flex-end; margin-bottom: 1.25rem; }
+.rice-add-row .rice-field { flex: 1 1 120px; }
+.rice-btn {font-family: var(--sans);font-size: 0.85rem;font-weight: 500;padding: 0.55rem 1.1rem;border-radius: 6px;border: none;background: var(--accent);color: white;cursor: pointer;white-space: nowrap;transition: background 0.15s;}
+.rice-btn:hover { background: #155778; }
+.rice-score { font-family: var(--mono); font-weight: 600; color: var(--accent); }
+
+/* ROI calculator */
+.roi-grid {display: grid;grid-template-columns: 1fr 1fr;gap: 1.5rem;align-items: start;}
+.roi-field { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; }
+.roi-field label {font-size: 0.78rem;color: var(--ink-soft);font-weight: 500;}
+.roi-field input {font-family: var(--sans);font-size: 0.95rem;padding: 0.55rem 0.7rem;border-radius: 6px;border: 1px solid var(--border);background: var(--bg);color: var(--ink);}
+.roi-output { display: flex; flex-direction: column; gap: 0.75rem; }
+.roi-output-box {background: var(--bg);border: 1px solid var(--border);border-radius: 10px;padding: 1rem 1.1rem;}
+.roi-output-num {font-family: var(--serif);font-size: 1.7rem;color: var(--accent);line-height: 1;margin-bottom: 0.2rem;}
+.roi-output-label {font-size: 0.75rem;color: var(--ink-muted);text-transform: uppercase;letter-spacing: 0.03em;}
+
+@media (max-width: 768px) {
+  .metric-strip { grid-template-columns: 1fr 1fr; }
+  .container { padding: 0 1.25rem; }
+  .case-header { padding: 3.5rem 0 2rem; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .quarter-board { grid-template-columns: 1fr 1fr; }
+  .rice-form { grid-template-columns: 1fr 1fr; }
+  .roi-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .quarter-board { grid-template-columns: 1fr; }
+  .rice-form { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Ade Okerinde</a>
+  <a href="../index.html#artifacts" class="back-link">← Back to artifacts</a>
+</nav>
+
+<div class="container">
+  <header class="case-header">
+    <div class="case-eyebrow">Portfolio Artifact · Product Roadmap Framework</div>
+    <h1 class="case-h1">Outcome-Based Product Roadmap Framework</h1>
+    <p class="case-intro">A reusable roadmap template built around three things every roadmap review actually needs:
+    initiatives grouped by outcome (not just feature name), a transparent prioritization score so "why this, why
+    now" has an answer, and a lightweight ROI model that turns an investment ask into numbers a finance partner can
+    approve quickly. The three tools below are sample data — swap in a real backlog and they work the same way.</p>
+    <div class="case-tags">
+      <span class="tag accent">Roadmapping</span>
+      <span class="tag">RICE Prioritization</span>
+      <span class="tag">ROI Modeling</span>
+      <span class="tag">Stakeholder Communication</span>
+    </div>
+
+    <div class="metric-strip">
+      <div class="metric-box"><div class="metric-box-num">4</div><div class="metric-box-label">Quarters modeled</div></div>
+      <div class="metric-box"><div class="metric-box-num">RICE</div><div class="metric-box-label">Prioritization method</div></div>
+      <div class="metric-box"><div class="metric-box-num">2</div><div class="metric-box-label">Audience views</div></div>
+      <div class="metric-box"><div class="metric-box-num">3</div><div class="metric-box-label">Interactive tools</div></div>
+    </div>
+  </header>
+
+  <section class="case-section">
+    <div class="section-label">01 · Framework</div>
+    <h2>How I structure a roadmap</h2>
+    <p>Every initiative on the board answers three questions before it earns a quarter slot: what outcome does this
+    move (not just what ships), how was it prioritized relative to everything else competing for the same team's
+    time, and what's the return if it's funded. The three tools on this page are the working parts of that
+    framework — a quarter-by-quarter board with a dual audience view, a live RICE scoring calculator, and a
+    payback/ROI calculator for the investment conversation.</p>
+  </section>
+
+  <section class="case-section" id="quarter-board-section">
+    <div class="section-label">Interactive · Quarter Roadmap</div>
+    <h2>Quarter-by-quarter roadmap, two audiences</h2>
+    <p class="dash-note">Toggle between the executive framing (outcome only) and the delivery framing (full
+    initiative detail) — same roadmap, different altitude. Filter by theme to see how a single workstream lands
+    across the year.</p>
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-title">Sample Annual Roadmap</div>
+        <div class="dash-toggle" id="audienceToggle">
+          <button class="dash-toggle-btn active" data-audience="exec">Executive View</button>
+          <button class="dash-toggle-btn" data-audience="delivery">Delivery View</button>
+        </div>
+      </div>
+      <div class="chip-row" id="themeFilter">
+        <button class="chip active" data-theme="all">All Themes</button>
+        <button class="chip" data-theme="platform">Platform</button>
+        <button class="chip" data-theme="analytics">Analytics</button>
+        <button class="chip" data-theme="ai">AI &amp; Automation</button>
+        <button class="chip" data-theme="compliance">Compliance</button>
+      </div>
+      <div class="quarter-board" id="quarterBoard"></div>
+    </div>
+  </section>
+
+  <section class="case-section" id="rice-section">
+    <div class="section-label">Interactive · Prioritization</div>
+    <h2>RICE scoring calculator</h2>
+    <p class="dash-note">Reach × Impact × Confidence ÷ Effort. Add a candidate initiative and it's ranked into the
+    backlog below by computed score — the same math I use to defend "why this, why now" in a roadmap review.</p>
+    <div class="dash-card">
+      <div class="rice-add-row">
+        <div class="rice-field" style="flex:2;">
+          <label>Initiative name</label>
+          <input type="text" id="riceName" placeholder="e.g. Self-service export API">
+        </div>
+        <div class="rice-field">
+          <label>Reach (users/qtr)</label>
+          <input type="number" id="riceReach" value="500" min="0">
+        </div>
+        <div class="rice-field">
+          <label>Impact</label>
+          <select id="riceImpact">
+            <option value="3">Massive (3)</option>
+            <option value="2" selected>High (2)</option>
+            <option value="1">Medium (1)</option>
+            <option value="0.5">Low (0.5)</option>
+            <option value="0.25">Minimal (0.25)</option>
+          </select>
+        </div>
+        <div class="rice-field">
+          <label>Confidence (%)</label>
+          <input type="number" id="riceConfidence" value="80" min="0" max="100">
+        </div>
+        <div class="rice-field">
+          <label>Effort (person-mo)</label>
+          <input type="number" id="riceEffort" value="2" min="0.1" step="0.1">
+        </div>
+        <button class="rice-btn" id="riceAddBtn">Add to backlog</button>
+      </div>
+      <table class="data-table" id="riceTable">
+        <thead>
+          <tr><th>Initiative</th><th>Reach</th><th>Impact</th><th>Confidence</th><th>Effort</th><th>RICE Score</th></tr>
+        </thead>
+        <tbody id="riceTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="case-section" id="roi-section">
+    <div class="section-label">Interactive · Business Case</div>
+    <h2>ROI &amp; payback calculator</h2>
+    <p class="dash-note">The last mile of a business case: turn an investment cost and expected annual benefit into a
+    payback period and multi-year ROI a finance partner can approve on the numbers.</p>
+    <div class="dash-card">
+      <div class="roi-grid">
+        <div>
+          <div class="roi-field">
+            <label>Investment cost ($)</label>
+            <input type="number" id="roiCost" value="150000" min="0">
+          </div>
+          <div class="roi-field">
+            <label>Expected annual benefit ($)</label>
+            <input type="number" id="roiBenefit" value="80000" min="0">
+          </div>
+        </div>
+        <div class="roi-output">
+          <div class="roi-output-box">
+            <div class="roi-output-num" id="roiPayback">—</div>
+            <div class="roi-output-label">Payback period (months)</div>
+          </div>
+          <div class="roi-output-box">
+            <div class="roi-output-num" id="roiThreeYear">—</div>
+            <div class="roi-output-label">3-Year ROI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="case-cta">
+  <h2>Want to see this applied to a real backlog?</h2>
+  <p>Happy to walk through how this framework flexes for a regulated, data-intensive environment.</p>
+  <div class="cta-links">
+    <a href="mailto:addieokerinde@gmail.com" class="contact-link accent">✉ Get in touch</a>
+    <a href="../index.html#artifacts" class="contact-link light">← All artifacts</a>
+  </div>
+</div>
+
+<footer>
+  <span>© <span id="year"></span> Ade Okerinde</span>
+  <span>Product Manager · AI Product Owner · CSPO · CSM</span>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ── QUARTER ROADMAP BOARD ── */
+const THEME_COLORS = { platform: '#1B6B93', analytics: '#C4622D', ai: '#1B6B45', compliance: '#7A8FA0' };
+const THEME_LABELS = { platform: 'Platform', analytics: 'Analytics', ai: 'AI & Automation', compliance: 'Compliance' };
+
+const initiatives = [
+  { quarter: 1, theme: 'platform', title: 'Unify data ingestion layer', execOutcome: 'Faster, more reliable reporting foundation', deliveryDetail: 'Consolidate 4 legacy ETL jobs into a single governed pipeline; owner: Data Engineering' },
+  { quarter: 1, theme: 'compliance', title: 'Audit-log retention overhaul', execOutcome: 'Closes a compliance gap flagged in last review', deliveryDetail: 'Extend retention to 7 years, add tamper-evident storage; owner: Platform + Security' },
+  { quarter: 2, theme: 'analytics', title: 'Self-service export API', execOutcome: 'Cuts ad hoc reporting requests to the data team', deliveryDetail: 'REST API + rate limiting + docs; owner: Analytics Platform' },
+  { quarter: 2, theme: 'ai', title: 'Fraud-signal model v2', execOutcome: 'Improves fraud catch rate without adding false positives', deliveryDetail: 'Retrain on 18mo of labeled data, shadow-mode validation; owner: Data Science' },
+  { quarter: 3, theme: 'platform', title: 'Row-level security rollout', execOutcome: 'Enables safe self-service access for new user segments', deliveryDetail: 'RLS policies across 12 workspaces; owner: BI Platform' },
+  { quarter: 3, theme: 'analytics', title: 'Exec dashboard redesign', execOutcome: 'Faster decisions from a single source of truth', deliveryDetail: 'Consolidate 6 legacy dashboards into 1 governed view; owner: Analytics' },
+  { quarter: 4, theme: 'ai', title: 'Adoption framework v2', execOutcome: 'Scales responsible AI review without slowing releases', deliveryDetail: 'Automate fairness/bias checks in CI; owner: AI Governance' },
+  { quarter: 4, theme: 'compliance', title: 'Vendor access recertification', execOutcome: 'Reduces third-party access risk ahead of audit season', deliveryDetail: 'Quarterly automated recert workflow; owner: Security + IT' },
+];
+
+let currentAudience = 'exec';
+let currentTheme = 'all';
+
+function renderQuarterBoard() {
+  const board = document.getElementById('quarterBoard');
+  board.innerHTML = '';
+  for (let q = 1; q <= 4; q++) {
+    const col = document.createElement('div');
+    col.innerHTML = `<div class="quarter-col-head">Q${q}</div>`;
+    const colBody = document.createElement('div');
+    colBody.className = 'quarter-col';
+    initiatives.filter(it => it.quarter === q).forEach(it => {
+      const card = document.createElement('div');
+      card.className = 'initiative-card';
+      if (currentTheme !== 'all' && it.theme !== currentTheme) card.classList.add('hidden');
+      const detail = currentAudience === 'exec' ? it.execOutcome : it.deliveryDetail;
+      const detailClass = currentAudience === 'exec' ? 'initiative-exec-outcome' : 'initiative-outcome';
+      card.innerHTML = `<div class="initiative-title"><span class="initiative-theme-dot" style="background:${THEME_COLORS[it.theme]}"></span>${it.title}</div><div class="${detailClass}">${detail}</div>`;
+      colBody.appendChild(card);
+    });
+    col.appendChild(colBody);
+    board.appendChild(col);
+  }
+}
+
+document.querySelectorAll('#audienceToggle .dash-toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#audienceToggle .dash-toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentAudience = btn.dataset.audience;
+    renderQuarterBoard();
+  });
+});
+
+document.querySelectorAll('#themeFilter .chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#themeFilter .chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    currentTheme = chip.dataset.theme;
+    renderQuarterBoard();
+  });
+});
+
+renderQuarterBoard();
+
+/* ── RICE CALCULATOR ── */
+const riceBacklog = [
+  { name: 'Consolidated compliance dashboard', reach: 300, impact: 2, confidence: 90, effort: 1.5 },
+  { name: 'Automated data quality gates', reach: 1200, impact: 3, confidence: 70, effort: 3 },
+  { name: 'Referral source attribution report', reach: 150, impact: 1, confidence: 80, effort: 1 },
+];
+
+function riceScore(item) {
+  return (item.reach * item.impact * (item.confidence / 100)) / item.effort;
+}
+
+function renderRiceTable() {
+  const tbody = document.getElementById('riceTableBody');
+  const sorted = [...riceBacklog].sort((a, b) => riceScore(b) - riceScore(a));
+  tbody.innerHTML = '';
+  sorted.forEach(item => {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td>${item.name}</td><td>${item.reach}</td><td>${item.impact}</td><td>${item.confidence}%</td><td>${item.effort}</td><td class="rice-score">${riceScore(item).toFixed(0)}</td>`;
+    tbody.appendChild(row);
+  });
+}
+
+document.getElementById('riceAddBtn').addEventListener('click', () => {
+  const name = document.getElementById('riceName').value.trim();
+  if (!name) return;
+  riceBacklog.push({
+    name,
+    reach: parseFloat(document.getElementById('riceReach').value) || 0,
+    impact: parseFloat(document.getElementById('riceImpact').value),
+    confidence: parseFloat(document.getElementById('riceConfidence').value) || 0,
+    effort: parseFloat(document.getElementById('riceEffort').value) || 1,
+  });
+  document.getElementById('riceName').value = '';
+  renderRiceTable();
+});
+
+renderRiceTable();
+
+/* ── ROI CALCULATOR ── */
+const roiCost = document.getElementById('roiCost');
+const roiBenefit = document.getElementById('roiBenefit');
+const roiPayback = document.getElementById('roiPayback');
+const roiThreeYear = document.getElementById('roiThreeYear');
+
+function updateRoi() {
+  const cost = parseFloat(roiCost.value) || 0;
+  const benefit = parseFloat(roiBenefit.value) || 0;
+  if (benefit <= 0) {
+    roiPayback.textContent = '—';
+    roiThreeYear.textContent = '—';
+    return;
+  }
+  const paybackMonths = (cost / benefit) * 12;
+  const threeYearReturn = ((benefit * 3 - cost) / cost) * 100;
+  roiPayback.textContent = paybackMonths.toFixed(1);
+  roiThreeYear.textContent = threeYearReturn.toFixed(0) + '%';
+}
+
+roiCost.addEventListener('input', updateRoi);
+roiBenefit.addEventListener('input', updateRoi);
+updateRoi();
+</script>
+
+</body>
+</html>
