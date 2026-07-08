@@ -1,0 +1,49 @@
+name: Pricing Feature Validation Pipeline
+
+# Runs automatically on every PR that touches a rating-variable definition.
+# Blocks merge until data quality, back-test, and fairness gates pass --
+# giving actuarial an auto-generated impact report to review on top of,
+# instead of starting their review from a blank spreadsheet.
+
+on:
+  pull_request:
+    paths:
+      - "pipeline/feature_definitions/**"
+
+jobs:
+  validate-feature:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r pipeline/requirements.txt
+
+      - name: Run data quality + model validation gates
+        run: python pipeline/data_quality/validation_gates.py
+
+      - name: Generate actuarial impact dashboard
+        run: python pipeline/data_quality/generate_impact_report.py
+        # Posts a summary comment on the PR with rate disruption, fairness,
+        # and backtest lift results -- so actuarial reviews a live artifact
+        # instead of waiting for a written exhibit.
+
+      - name: Fail merge if any gate failed
+        run: python pipeline/data_quality/enforce_gates.py
+
+  register-on-approval:
+    needs: validate-feature
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Register approved model version
+        run: python pipeline/model_registry/register_model.py
+
+      - name: Generate regulatory filing draft
+        run: python pipeline/regulatory_docs/generate_filing_doc.py
