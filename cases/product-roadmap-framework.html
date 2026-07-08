@@ -115,6 +115,23 @@ footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padd
 .rice-btn:hover { background: #155778; }
 .rice-score { font-family: var(--mono); font-weight: 600; color: var(--accent); }
 
+/* MoSCoW board */
+.moscow-board {display: grid;grid-template-columns: repeat(4, 1fr);gap: 0.85rem;}
+.moscow-col-head {font-family: var(--mono);font-size: 0.72rem;text-transform: uppercase;letter-spacing: 0.05em;margin-bottom: 0.6rem;padding-bottom: 0.5rem;border-bottom: 2px solid var(--border);}
+.moscow-col-head.must { color: var(--accent); border-color: var(--accent); }
+.moscow-col-head.should { color: #1B6B45; border-color: #1B6B45; }
+.moscow-col-head.could { color: var(--accent-warm); border-color: var(--accent-warm); }
+.moscow-col-head.wont { color: var(--ink-muted); border-color: var(--border); }
+.moscow-card {background: var(--bg);border: 1px solid var(--border);border-radius: 8px;padding: 0.7rem 0.8rem;margin-bottom: 0.6rem;}
+.moscow-card-title {font-size: 0.82rem;font-weight: 600;color: var(--ink);margin-bottom: 0.5rem;}
+.moscow-btn-row { display: flex; gap: 0.3rem; }
+.moscow-btn {flex: 1;font-family: var(--mono);font-size: 0.62rem;padding: 0.28rem 0;border-radius: 4px;border: 1px solid var(--border);background: var(--bg-card);color: var(--ink-muted);cursor: pointer;text-align: center;transition: all 0.15s;}
+.moscow-btn:hover { border-color: var(--ink-soft); }
+.moscow-btn.sel-must { background: var(--accent); border-color: var(--accent); color: white; }
+.moscow-btn.sel-should { background: #1B6B45; border-color: #1B6B45; color: white; }
+.moscow-btn.sel-could { background: var(--accent-warm); border-color: var(--accent-warm); color: white; }
+.moscow-btn.sel-wont { background: var(--ink-muted); border-color: var(--ink-muted); color: white; }
+
 /* ROI calculator */
 .roi-grid {display: grid;grid-template-columns: 1fr 1fr;gap: 1.5rem;align-items: start;}
 .roi-field { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; }
@@ -133,10 +150,12 @@ footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padd
   .quarter-board { grid-template-columns: 1fr 1fr; }
   .rice-form { grid-template-columns: 1fr 1fr; }
   .roi-grid { grid-template-columns: 1fr; }
+  .moscow-board { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 480px) {
   .quarter-board { grid-template-columns: 1fr; }
   .rice-form { grid-template-columns: 1fr; }
+  .moscow-board { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -152,21 +171,22 @@ footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padd
     <div class="case-eyebrow">Portfolio Artifact · Product Roadmap Framework</div>
     <h1 class="case-h1">Outcome-Based Product Roadmap Framework</h1>
     <p class="case-intro">A reusable roadmap template built around three things every roadmap review actually needs:
-    initiatives grouped by outcome (not just feature name), a transparent prioritization score so "why this, why
+    initiatives grouped by outcome (not just feature name), a transparent prioritization approach so "why this, why
     now" has an answer, and a lightweight ROI model that turns an investment ask into numbers a finance partner can
-    approve quickly. The three tools below are sample data — swap in a real backlog and they work the same way.</p>
+    approve quickly. The four tools below are sample data — swap in a real backlog and they work the same way.</p>
     <div class="case-tags">
       <span class="tag accent">Roadmapping</span>
       <span class="tag">RICE Prioritization</span>
+      <span class="tag">MoSCoW Prioritization</span>
       <span class="tag">ROI Modeling</span>
       <span class="tag">Stakeholder Communication</span>
     </div>
 
     <div class="metric-strip">
       <div class="metric-box"><div class="metric-box-num">4</div><div class="metric-box-label">Quarters modeled</div></div>
-      <div class="metric-box"><div class="metric-box-num">RICE</div><div class="metric-box-label">Prioritization method</div></div>
+      <div class="metric-box"><div class="metric-box-num">2</div><div class="metric-box-label">Prioritization methods</div></div>
       <div class="metric-box"><div class="metric-box-num">2</div><div class="metric-box-label">Audience views</div></div>
-      <div class="metric-box"><div class="metric-box-num">3</div><div class="metric-box-label">Interactive tools</div></div>
+      <div class="metric-box"><div class="metric-box-num">4</div><div class="metric-box-label">Interactive tools</div></div>
     </div>
   </header>
 
@@ -206,10 +226,11 @@ footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padd
   </section>
 
   <section class="case-section" id="rice-section">
-    <div class="section-label">Interactive · Prioritization</div>
+    <div class="section-label">Interactive · Prioritization, Method 1</div>
     <h2>RICE scoring calculator</h2>
     <p class="dash-note">Reach × Impact × Confidence ÷ Effort. Add a candidate initiative and it's ranked into the
-    backlog below by computed score — the same math I use to defend "why this, why now" in a roadmap review.</p>
+    backlog below by computed score — the quantitative ranking I use to defend "why this, why now" within a single
+    workstream.</p>
     <div class="dash-card">
       <div class="rice-add-row">
         <div class="rice-field" style="flex:2;">
@@ -246,6 +267,18 @@ footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padd
         </thead>
         <tbody id="riceTableBody"></tbody>
       </table>
+    </div>
+  </section>
+
+  <section class="case-section" id="moscow-section">
+    <div class="section-label">Interactive · Prioritization, Method 2</div>
+    <h2>MoSCoW prioritization board</h2>
+    <p class="dash-note">Must have, Should have, Could have, Won't have. Where RICE ranks initiatives against each
+    other with a number, MoSCoW scopes a single release or negotiation — it's the tool I reach for when the
+    conversation is "what's actually in this quarter" rather than "what's next in the backlog." Click a button on
+    any card to recategorize it.</p>
+    <div class="dash-card">
+      <div class="moscow-board" id="moscowBoard"></div>
     </div>
   </section>
 
@@ -395,6 +428,56 @@ document.getElementById('riceAddBtn').addEventListener('click', () => {
 });
 
 renderRiceTable();
+
+/* ── MOSCOW BOARD ── */
+const MOSCOW_COLUMNS = [
+  { key: 'must', label: "Must Have" },
+  { key: 'should', label: "Should Have" },
+  { key: 'could', label: "Could Have" },
+  { key: 'wont', label: "Won't Have (this cycle)" },
+];
+
+const moscowItems = [
+  { name: 'Automated data quality gates', category: 'must' },
+  { name: 'Consolidated compliance dashboard', category: 'must' },
+  { name: 'Self-service export API', category: 'should' },
+  { name: 'Fraud-signal model v2', category: 'should' },
+  { name: 'Row-level security rollout', category: 'could' },
+  { name: 'Exec dashboard redesign', category: 'could' },
+  { name: 'Referral source attribution report', category: 'could' },
+  { name: 'Legacy report archive cleanup', category: 'wont' },
+];
+
+function renderMoscowBoard() {
+  const board = document.getElementById('moscowBoard');
+  board.innerHTML = '';
+  MOSCOW_COLUMNS.forEach(col => {
+    const colEl = document.createElement('div');
+    colEl.innerHTML = `<div class="moscow-col-head ${col.key}">${col.label}</div>`;
+    const colBody = document.createElement('div');
+    moscowItems.filter(item => item.category === col.key).forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'moscow-card';
+      const btnRow = MOSCOW_COLUMNS.map(c =>
+        `<button class="moscow-btn ${item.category === c.key ? 'sel-' + c.key : ''}" data-name="${item.name}" data-cat="${c.key}">${c.key === 'wont' ? "W" : c.key.charAt(0).toUpperCase()}</button>`
+      ).join('');
+      card.innerHTML = `<div class="moscow-card-title">${item.name}</div><div class="moscow-btn-row">${btnRow}</div>`;
+      colBody.appendChild(card);
+    });
+    colEl.appendChild(colBody);
+    board.appendChild(colEl);
+  });
+
+  board.querySelectorAll('.moscow-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = moscowItems.find(i => i.name === btn.dataset.name);
+      item.category = btn.dataset.cat;
+      renderMoscowBoard();
+    });
+  });
+}
+
+renderMoscowBoard();
 
 /* ── ROI CALCULATOR ── */
 const roiCost = document.getElementById('roiCost');
