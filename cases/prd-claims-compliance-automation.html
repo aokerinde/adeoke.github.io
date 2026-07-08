@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PRD: AI &amp; RPA-Driven Claims &amp; Compliance Automation | Ade Okerinde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0F1923;
+  --ink-soft: #3D4F5C;
+  --ink-muted: #7A8FA0;
+  --bg: #F5F2ED;
+  --bg-card: #FDFCF9;
+  --accent: #1B6B93;
+  --accent-warm: #C4622D;
+  --accent-light: #E8F3F9;
+  --border: #DDD8D0;
+  --tag-bg: #EAE6DE;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {font-family: var(--sans);background: var(--bg);color: var(--ink);font-size: 16px;line-height: 1.65;}
+
+nav {position: sticky;top: 0; left: 0; right: 0;z-index: 100;padding: 1.1rem 2.5rem;display: flex;justify-content: space-between;align-items: center;background: rgba(245,242,237,0.9);backdrop-filter: blur(12px);border-bottom: 1px solid var(--border);}
+.nav-logo {font-family: var(--serif);font-size: 1.2rem;color: var(--ink);text-decoration: none;letter-spacing: -0.01em;}
+.back-link {font-size: 0.82rem;font-weight: 500;color: var(--accent);text-decoration: none;display: flex;align-items: center;gap: 0.4rem;}
+.back-link:hover { text-decoration: underline; }
+
+.container {max-width: 960px;margin: 0 auto;padding: 0 2.5rem;}
+
+/* HEADER */
+.case-header {padding: 5rem 0 3.5rem;}
+.case-eyebrow {font-family: var(--mono);font-size: 0.78rem;color: var(--accent);letter-spacing: 0.1em;text-transform: uppercase;margin-bottom: 1.25rem;display: flex;align-items: center;gap: 0.75rem;}
+.case-eyebrow::before {content: '';display: block;width: 32px;height: 1px;background: var(--accent);}
+.case-h1 {font-family: var(--serif);font-size: clamp(2.1rem, 5vw, 3rem);line-height: 1.1;letter-spacing: -0.02em;margin-bottom: 1.25rem;}
+.case-intro {font-size: 1.05rem;color: var(--ink-soft);max-width: 720px;margin-bottom: 2rem;}
+.case-tags {display: flex;flex-wrap: wrap;gap: 0.4rem;margin-bottom: 2rem;}
+.tag {font-family: var(--mono);font-size: 0.68rem;padding: 0.3rem 0.65rem;border-radius: 4px;background: var(--tag-bg);color: var(--ink-soft);letter-spacing: 0.04em;text-transform: uppercase;}
+.tag.accent { background: var(--accent-light); color: var(--accent); }
+
+.doc-meta {display: flex;flex-wrap: wrap;gap: 1.5rem;font-size: 0.82rem;color: var(--ink-muted);margin-bottom: 2rem;padding-bottom: 1.5rem;border-bottom: 1px solid var(--border);}
+.doc-meta strong { color: var(--ink-soft); }
+
+/* METRIC STRIP */
+.metric-strip {display: grid;grid-template-columns: repeat(4, 1fr);gap: 1rem;margin: 0 0 2.5rem;}
+.metric-box {background: var(--bg-card);border: 1px solid var(--border);border-radius: 10px;padding: 1.1rem;position: relative;overflow: hidden;}
+.metric-box::before {content: '';position: absolute;top: 0; left: 0;width: 3px;height: 100%;background: var(--accent);}
+.metric-box-num {font-family: var(--serif);font-size: 1.6rem;color: var(--ink);line-height: 1;margin-bottom: 0.25rem;}
+.metric-box-label {font-size: 0.72rem;color: var(--ink-muted);text-transform: uppercase;letter-spacing: 0.04em;}
+
+/* TOC */
+.toc {background: var(--bg-card);border: 1px solid var(--border);border-radius: 10px;padding: 1.25rem 1.5rem;margin-bottom: 1rem;}
+.toc-label {font-family: var(--mono);font-size: 0.7rem;color: var(--accent);text-transform: uppercase;letter-spacing: 0.06em;margin-bottom: 0.75rem;}
+.toc-list {list-style: none;columns: 2;column-gap: 1.5rem;}
+.toc-list li { margin-bottom: 0.45rem; font-size: 0.85rem; }
+.toc-list a { color: var(--ink-soft); text-decoration: none; }
+.toc-list a:hover { color: var(--accent); text-decoration: underline; }
+
+/* SECTIONS */
+.case-section { padding: 3rem 0; border-top: 1px solid var(--border); }
+.case-section:first-of-type { border-top: none; }
+.section-label {font-family: var(--mono);font-size: 0.75rem;color: var(--accent);text-transform: uppercase;letter-spacing: 0.1em;margin-bottom: 0.75rem;display: flex;align-items: center;gap: 0.5rem;}
+.section-label::before {content: '';display: inline-block;width: 20px;height: 1px;background: var(--accent);}
+.case-section h2 {font-family: var(--serif);font-size: clamp(1.5rem, 3vw, 2rem);letter-spacing: -0.01em;margin-bottom: 1.25rem;line-height: 1.15;}
+.case-section h3 {font-family: var(--sans);font-weight: 600;font-size: 1rem;margin: 1.5rem 0 0.6rem;color: var(--ink);}
+.case-section p { color: var(--ink-soft); margin-bottom: 1rem; font-size: 0.95rem; }
+.case-section ul, .case-section ol { margin: 0 0 1rem 1.25rem; color: var(--ink-soft); font-size: 0.92rem; }
+.case-section li { margin-bottom: 0.4rem; }
+
+/* Two-col in/out of scope */
+.scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1rem; }
+.scope-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.4rem; }
+.scope-box h4 { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+.scope-box.in h4 { color: var(--accent); }
+.scope-box.out h4 { color: var(--ink-muted); }
+.scope-box ul { margin: 0; padding-left: 1.1rem; }
+.scope-box li { font-size: 0.85rem; margin-bottom: 0.4rem; }
+
+/* TABLE */
+.data-table {width: 100%;border-collapse: collapse;margin: 1.25rem 0;font-size: 0.85rem;background: var(--bg-card);border: 1px solid var(--border);border-radius: 10px;overflow: hidden;}
+.data-table th {background: var(--tag-bg);text-align: left;padding: 0.65rem 0.85rem;font-family: var(--mono);font-size: 0.7rem;text-transform: uppercase;letter-spacing: 0.04em;color: var(--ink-soft);}
+.data-table td {padding: 0.65rem 0.85rem;border-top: 1px solid var(--border);color: var(--ink-soft);vertical-align: top;}
+.data-table tr:nth-child(even) td { background: rgba(0,0,0,0.012); }
+
+/* PERSONAS */
+.persona-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.persona-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; }
+.persona-avatar { width: 2.4rem; height: 2.4rem; border-radius: 8px; background: var(--accent-light); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.85rem; font-family: var(--mono); }
+.persona-name { font-weight: 600; font-size: 1rem; margin-bottom: 0.15rem; color: var(--ink); }
+.persona-role { font-size: 0.78rem; color: var(--ink-muted); margin-bottom: 0.9rem; }
+.persona-sub { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-muted); margin: 0.75rem 0 0.35rem; }
+.persona-card ul { margin: 0 0 0 1.1rem; padding: 0; }
+.persona-card li { font-size: 0.82rem; margin-bottom: 0.3rem; color: var(--ink-soft); }
+
+/* EPICS / STORIES */
+.epic-block { margin-bottom: 2.25rem; }
+.epic-block:last-child { margin-bottom: 0; }
+.epic-head { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.35rem; flex-wrap: wrap; }
+.epic-id { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
+.epic-title { font-family: var(--sans); font-weight: 600; font-size: 1.05rem; color: var(--ink); }
+.epic-desc { font-size: 0.85rem; color: var(--ink-muted); margin-bottom: 1rem; }
+
+.story-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.3rem; margin-bottom: 0.85rem; }
+.story-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.65rem; flex-wrap: wrap; }
+.story-id { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.story-priority { font-family: var(--mono); font-size: 0.63rem; padding: 0.2rem 0.55rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.03em; flex-shrink: 0; font-weight: 600; }
+.story-priority.must { background: var(--accent-light); color: var(--accent); }
+.story-priority.should { background: #E6F4EF; color: #1B6B45; }
+.story-priority.could { background: #FDEEE6; color: var(--accent-warm); }
+.story-text { font-size: 0.92rem; color: var(--ink); margin-bottom: 0.8rem; line-height: 1.55; }
+.ac-label { font-family: var(--mono); font-size: 0.66rem; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+.ac-list { margin: 0; padding: 0; list-style: none; }
+.ac-list li { font-size: 0.84rem; color: var(--ink-soft); padding: 0.28rem 0 0.28rem 1.15rem; position: relative; margin-bottom: 0; }
+.ac-list li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: bold; font-size: 0.76rem; }
+
+.backlog-note { font-size: 0.85rem; color: var(--ink-muted); font-style: italic; margin-top: 1.25rem; }
+
+/* CAVEAT BOX */
+.caveat {border: 1.5px dashed var(--border);border-radius: 10px;padding: 1.1rem 1.25rem;font-size: 0.88rem;color: var(--ink-muted);margin: 1.5rem 0;}
+.caveat strong { color: var(--ink-soft); }
+
+/* CTA STRIP */
+.case-cta {background: var(--ink);color: white;padding: 3.5rem 0;text-align: center;margin-top: 2rem;}
+.case-cta h2 {font-family: var(--serif);font-size: clamp(1.6rem, 3vw, 2.2rem);margin-bottom: 0.75rem;}
+.case-cta p { color: rgba(255,255,255,0.65); margin-bottom: 1.5rem; }
+.cta-links {display: flex;justify-content: center;gap: 0.75rem;flex-wrap: wrap;}
+.contact-link {display: inline-flex;align-items: center;gap: 0.5rem;padding: 0.7rem 1.4rem;border-radius: 6px;font-size: 0.88rem;font-weight: 500;text-decoration: none;transition: all 0.2s;}
+.contact-link.light {background: rgba(255,255,255,0.1);color: white;border: 1px solid rgba(255,255,255,0.15);}
+.contact-link.light:hover { background: rgba(255,255,255,0.18); }
+.contact-link.accent {background: var(--accent);color: white;}
+.contact-link.accent:hover { background: #155778; }
+
+footer {background: var(--ink);border-top: 1px solid rgba(255,255,255,0.08);padding: 1.5rem 2.5rem;display: flex;justify-content: space-between;align-items: center;color: rgba(255,255,255,0.35);font-size: 0.78rem;}
+
+@media (max-width: 768px) {
+  .metric-strip { grid-template-columns: 1fr 1fr; }
+  .container { padding: 0 1.25rem; }
+  .case-header { padding: 3.5rem 0 2rem; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .scope-grid { grid-template-columns: 1fr; }
+  .toc-list { columns: 1; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Ade Okerinde</a>
+  <a href="../index.html#artifacts" class="back-link">← Back to artifacts</a>
+</nav>
+
+<div class="container">
+  <header class="case-header">
+    <div class="case-eyebrow">Portfolio Artifact · Product Requirements Document</div>
+    <h1 class="case-h1">AI &amp; RPA-Driven Claims &amp; Compliance Automation</h1>
+    <p class="case-intro">The PRD behind the claims automation initiative featured in my case studies — the problem
+    statement, personas, epics, user stories with acceptance criteria, non-functional requirements, and success
+    metrics used to take an AI/RPA claims and compliance rollout from proposal to production at Molina Healthcare.
+    Company- and system-specific details below are illustrative; the structure, prioritization approach, and
+    acceptance-criteria style reflect how I actually write PRDs.</p>
+    <div class="case-tags">
+      <span class="tag accent">Healthcare AI</span>
+      <span class="tag">RPA</span>
+      <span class="tag">Claims Systems</span>
+      <span class="tag">Regulatory Compliance</span>
+    </div>
+
+    <div class="doc-meta">
+      <span><strong>Author:</strong> Ade Okerinde, Product Manager</span>
+      <span><strong>Status:</strong> Shipped (Phase 1–3 complete)</span>
+      <span><strong>Stakeholders:</strong> Claims Ops, Compliance, Data Science, Engineering, Clinical, Legal</span>
+    </div>
+
+    <div class="metric-strip">
+      <div class="metric-box"><div class="metric-box-num">30%</div><div class="metric-box-label">Cycle-time reduction</div></div>
+      <div class="metric-box"><div class="metric-box-num">25%</div><div class="metric-box-label">Error-rate reduction</div></div>
+      <div class="metric-box"><div class="metric-box-num">40%</div><div class="metric-box-label">Less manual audit effort</div></div>
+      <div class="metric-box"><div class="metric-box-num">$1.2M+</div><div class="metric-box-label">Annual savings</div></div>
+    </div>
+
+    <div class="toc">
+      <div class="toc-label">Contents</div>
+      <ul class="toc-list">
+        <li><a href="#background">1. Business background</a></li>
+        <li><a href="#problem">2. Problem statement</a></li>
+        <li><a href="#goals">3. Goals &amp; success metrics</a></li>
+        <li><a href="#scope">4. Scope</a></li>
+        <li><a href="#stakeholders">5. Stakeholders</a></li>
+        <li><a href="#personas">6. User personas</a></li>
+        <li><a href="#epics">7. Epics &amp; user stories</a></li>
+        <li><a href="#nfr">8. Non-functional requirements</a></li>
+        <li><a href="#risks">9. Risks &amp; assumptions</a></li>
+        <li><a href="#rollout">10. Rollout plan</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="case-section" id="background">
+    <div class="section-label">01 · Business Background</div>
+    <h2>Why claims and compliance, why now</h2>
+    <p>Claims and back-office audit workflows relied on manual review at nearly every step: intake validation, code
+    and eligibility checks, fraud/anomaly screening, adjudication, and compliance sampling were each performed by
+    hand or with disconnected point tools. As claims volume grew, cycle times and error rates grew with it, and audit
+    coverage was limited by how many claims a compliance team could physically sample. Regulatory expectations —
+    timely adjudication SLAs, documentation standards, and fair, explainable decisioning — didn't move, but the
+    manual process was increasingly the bottleneck to meeting them consistently.</p>
+    <p>AI and RPA were viable here specifically because the failure modes were well understood: most claims are
+    routine and rules-based (good RPA fit), a minority carry fraud/anomaly risk that benefits from pattern detection
+    at scale (good ML fit), and the remainder need human judgment (good human-in-the-loop fit). The PRD below reflects
+    that three-way split rather than treating automation as an all-or-nothing replacement for claims examiners.</p>
+  </section>
+
+  <section class="case-section" id="problem">
+    <div class="section-label">02 · Problem Statement</div>
+    <h2>What was actually broken</h2>
+    <p>Claims examiners and compliance auditors were spending the majority of their time on work that didn't require
+    their judgment — manual data validation, re-keying information already available in source systems, and auditing
+    claims essentially at random rather than by risk — while genuinely complex or high-risk claims didn't reliably get
+    more scrutiny than routine ones.</p>
+    <ul>
+      <li><strong>Long, inconsistent cycle times</strong> — claims sat in queue not because they were complex, but because they were waiting behind simpler claims for the same manual validation steps.</li>
+      <li><strong>Error rates driving rework</strong> — data-entry and eligibility mismatches weren't caught until later in the process, producing appeals, reprocessing, and provider abrasion.</li>
+      <li><strong>Audit coverage was a sampling problem, not a rigor problem</strong> — compliance could only manually review a small, largely random slice of claims, so risk wasn't necessarily where the scrutiny was.</li>
+      <li><strong>No consistent audit trail</strong> — reconstructing why a claim was adjudicated a certain way required piecing together notes across systems, which slowed both internal QA and external regulatory response.</li>
+    </ul>
+  </section>
+
+  <section class="case-section" id="goals">
+    <div class="section-label">03 · Goals &amp; Success Metrics</div>
+    <h2>What "done" looks like, in numbers</h2>
+    <table class="data-table">
+      <tr><th>Objective</th><th>Metric</th><th>Target</th></tr>
+      <tr><td>Reduce claims cycle time</td><td>Average days from intake to adjudication</td><td>-30%</td></tr>
+      <tr><td>Reduce error rate</td><td>% of claims requiring rework/reprocessing</td><td>-25%</td></tr>
+      <tr><td>Reduce manual audit effort</td><td>Auditor hours spent per claim reviewed</td><td>-40%</td></tr>
+      <tr><td>Deliver operational savings</td><td>Annualized cost avoidance from automation</td><td>$1.2M+</td></tr>
+      <tr><td>Maintain adjudication quality</td><td>Critical audit findings per quarter</td><td>Zero, sustained</td></tr>
+      <tr><td>Keep delivery predictable</td><td>Sprint completion rate across the build</td><td>≥95%</td></tr>
+    </table>
+  </section>
+
+  <section class="case-section" id="scope">
+    <div class="section-label">04 · Scope</div>
+    <h2>What Phase 1 includes — and deliberately excludes</h2>
+    <p>Scope was deliberately constrained to routine, high-volume claim types first, so the team could prove the
+    automation and governance model before extending it to more complex claim categories.</p>
+    <div class="scope-grid">
+      <div class="scope-box in">
+        <h4>In scope — Phase 1</h4>
+        <ul>
+          <li>RPA validation of eligibility, provider network status, and code pairing at intake</li>
+          <li>AI risk/anomaly scoring on all validated claims</li>
+          <li>Human-in-the-loop review queue prioritized by risk and SLA</li>
+          <li>Immutable audit trail across automated and human decision points</li>
+          <li>Risk-stratified compliance sampling (replacing purely random sampling)</li>
+          <li>Operational dashboard for cycle time, error rate, and automation rate</li>
+        </ul>
+      </div>
+      <div class="scope-box out">
+        <h4>Out of scope — Phase 1</h4>
+        <ul>
+          <li>Fully automated adjudication with no human review, for any claim tier</li>
+          <li>Appealed or previously-denied claims (routed to existing appeals process)</li>
+          <li>Non-standard/complex claim types with insufficient historical data to train a reliable model</li>
+          <li>Provider-facing self-service status tooling (handled by a separate initiative)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="stakeholders">
+    <div class="section-label">05 · Stakeholders</div>
+    <h2>Who this had to work for</h2>
+    <table class="data-table">
+      <tr><th>Stakeholder</th><th>Interest</th><th>Engagement approach</th></tr>
+      <tr><td>Claims Operations</td><td>Cycle time, workload manageability, examiner adoption</td><td>Workflow shadowing, iterative UI review, phased rollout with feedback loops</td></tr>
+      <tr><td>Compliance &amp; Audit</td><td>Regulatory defensibility, audit trail completeness, fairness</td><td>Joint design of sampling methodology and audit-log requirements; sign-off gate before each phase</td></tr>
+      <tr><td>Data Science</td><td>Model performance, feedback loop quality, retraining cadence</td><td>Shared ownership of model logging schema and override-feedback capture</td></tr>
+      <tr><td>Engineering</td><td>System integration, latency, reliability of RPA bots</td><td>Technical design reviews, SLA agreements for scoring latency</td></tr>
+      <tr><td>Clinical/Care teams</td><td>No disruption to member care from claims delays</td><td>Monthly sync during pilot to flag any downstream care impact</td></tr>
+      <tr><td>Legal</td><td>Regulatory compliance, explainability of automated decisions</td><td>Reviewed model explainability approach and audit-log format before go-live</td></tr>
+      <tr><td>Executive Sponsors</td><td>ROI, funding justification, timeline</td><td>Monthly summary reporting tying metrics to cost savings</td></tr>
+    </table>
+  </section>
+
+  <section class="case-section" id="personas">
+    <div class="section-label">06 · User Personas</div>
+    <h2>Who uses this day to day</h2>
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="persona-avatar">CE</div>
+        <div class="persona-name">Claims Examiner</div>
+        <div class="persona-role">Reviews and adjudicates flagged and routine claims</div>
+        <div class="persona-sub">Goals</div>
+        <ul>
+          <li>Work the highest-priority claims first without hunting across systems</li>
+          <li>Trust that pre-validated data is actually correct</li>
+          <li>Document decisions quickly without sacrificing rationale quality</li>
+        </ul>
+        <div class="persona-sub">Pain points</div>
+        <ul>
+          <li>Re-verifying data the system already checked</li>
+          <li>Opaque model flags with no explanation</li>
+          <li>Switching between systems to see full claim context</li>
+        </ul>
+      </div>
+      <div class="persona-card">
+        <div class="persona-avatar">CA</div>
+        <div class="persona-name">Compliance Auditor</div>
+        <div class="persona-role">Audits AI/RPA decisions and produces regulatory reporting</div>
+        <div class="persona-sub">Goals</div>
+        <ul>
+          <li>Pull a defensible, risk-stratified sample without manual list-building</li>
+          <li>Reconstruct any claim's full decision history in minutes, not days</li>
+          <li>Catch systemic issues before they become audit findings</li>
+        </ul>
+        <div class="persona-sub">Pain points</div>
+        <ul>
+          <li>Random sampling that misses where risk concentrates</li>
+          <li>Fragmented audit trails across multiple systems</li>
+          <li>No visibility into model fairness/bias until it's flagged externally</li>
+        </ul>
+      </div>
+      <div class="persona-card">
+        <div class="persona-avatar">OM</div>
+        <div class="persona-name">Claims Operations Manager</div>
+        <div class="persona-role">Owns SLA performance and team workload distribution</div>
+        <div class="persona-sub">Goals</div>
+        <ul>
+          <li>See cycle time and SLA risk in real time, not in a weekly report</li>
+          <li>Rebalance workload before claims breach SLA, not after</li>
+          <li>Report initiative impact to leadership in business terms</li>
+        </ul>
+        <div class="persona-sub">Pain points</div>
+        <ul>
+          <li>SLA breaches discovered after the fact</li>
+          <li>No single view of team capacity vs. queue volume</li>
+          <li>Manually translating operational metrics into cost-savings language for execs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="epics">
+    <div class="section-label">07 · Epics &amp; User Stories</div>
+    <h2>Backlog detail, with acceptance criteria</h2>
+    <p>This build shipped from a backlog of 150+ user stories with acceptance criteria and dependencies. Below is a
+    representative set across the four epics that structured the work — enough to show story-writing and
+    acceptance-criteria style, not the full backlog. Priority tags use MoSCoW.</p>
+
+    <div class="epic-block">
+      <div class="epic-head"><span class="epic-id">Epic A</span><span class="epic-title">Automated Claims Intake &amp; Validation</span></div>
+      <div class="epic-desc">RPA validates eligibility, network status, and coding before a claim ever reaches a human queue.</div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">A1</span><span class="story-priority must">Must</span></div>
+        <p class="story-text">As a <strong>Claims Operations Lead</strong>, I want incoming claims automatically validated against member eligibility, provider network status, and coding rules before entering the adjudication queue, so that claims with data-entry or eligibility errors are caught before they consume examiner time.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given a claim is submitted electronically, when it enters the intake queue, then the RPA bot validates member ID, provider NPI, and procedure/diagnosis code pairing against reference data within 60 seconds.</li>
+          <li>Given a claim fails validation, when the failure is logged, then it is routed to an exception queue with a specific failure reason code, not a generic rejection.</li>
+          <li>Given a claim passes validation, when it is queued for adjudication, then an audit-log entry records the automated checks performed and their results.</li>
+        </ul>
+      </div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">A2</span><span class="story-priority must">Must</span></div>
+        <p class="story-text">As a <strong>Claims Examiner</strong>, I want auto-validated claims to arrive pre-populated with eligibility and coding confirmation, so that I don't manually re-verify data the system has already checked.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given a claim has passed RPA validation, when it appears in the examiner's queue, then eligibility status, network status, and code-pairing confirmation are displayed inline.</li>
+          <li>Given the examiner opens a claim, when they review it, then they can see a timestamped log of which checks were automated vs. manually reviewed.</li>
+        </ul>
+      </div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">A3</span><span class="story-priority should">Should</span></div>
+        <p class="story-text">As a <strong>Compliance Auditor</strong>, I want RPA validation exception rates tracked by claim type and reason code, so that I can identify systemic data-quality issues upstream rather than one-off errors.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given validation exceptions occur, when they are logged, then they are categorized by reason code and claim type in a reporting table.</li>
+          <li>Given a reason code exceeds a defined exception-rate threshold in a rolling 7-day window, then an alert is generated for the compliance team.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="epic-block">
+      <div class="epic-head"><span class="epic-id">Epic B</span><span class="epic-title">AI-Powered Anomaly &amp; Fraud Detection</span></div>
+      <div class="epic-desc">Every validated claim is risk-scored so scrutiny concentrates where the risk actually is.</div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">B1</span><span class="story-priority must">Must</span></div>
+        <p class="story-text">As a <strong>Product Manager</strong>, I want the AI model to score every validated claim for anomaly/fraud risk before it reaches an examiner, so that high-risk claims get additional scrutiny without slowing down low-risk, routine claims.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given a claim passes intake validation, when it is scored, then the model returns a risk score (0–100) and top contributing factors within 5 seconds.</li>
+          <li>Given a claim's risk score exceeds the defined threshold, when it is routed, then it is flagged for mandatory secondary review rather than standard adjudication.</li>
+          <li>Given the model flags a claim, when an examiner reviews it, then the top contributing factors are shown in plain language, not raw model output.</li>
+        </ul>
+      </div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">B2</span><span class="story-priority must">Must</span></div>
+        <p class="story-text">As a <strong>Data Scientist</strong>, I want model predictions logged with the feature values used at scoring time, so that I can audit and retrain the model against ground-truth outcomes.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given a claim is scored, when the score is generated, then the feature vector, model version, and score are persisted to the model logging store.</li>
+          <li>Given a claim's final adjudication outcome is recorded, when it differs from the model's flag, then the discrepancy is captured for retraining analysis.</li>
+        </ul>
+      </div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">B3</span><span class="story-priority should">Should</span></div>
+        <p class="story-text">As an <strong>AI Governance Lead</strong>, I want fairness and bias metrics computed on model outputs across protected classes on a recurring basis, so that we can detect and correct disparate impact before it becomes a compliance issue.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given a rolling window of scored claims, when the fairness job runs weekly, then disparity metrics (e.g., false-positive rate parity) are computed across defined demographic segments.</li>
+          <li>Given a disparity metric exceeds the defined tolerance, when detected, then it is escalated to the AI Governance review board before the next model deployment.</li>
+        </ul>
+      </div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">B4</span><span class="story-priority could">Could</span></div>
+        <p class="story-text">As a <strong>Claims Examiner</strong>, I want to provide feedback when I disagree with a model's risk flag, so that the feedback can be used to improve future model versions.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given an examiner overrides a model flag, when they submit their decision, then they can optionally record a reason code for the override.</li>
+          <li>Given override feedback is collected, when a model retraining cycle begins, then override data is included in the training/evaluation dataset.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="epic-block">
+      <div class="epic-head"><span class="epic-id">Epic C</span><span class="epic-title">Human-in-the-Loop Review &amp; Adjudication</span></div>
+      <div class="epic-desc">Examiners work a single prioritized queue with full context and a documented decision trail.</div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">C1</span><span class="story-priority must">Must</span></div>
+        <p class="story-text">As a <strong>Claims Examiner</strong>, I want a unified review queue that prioritizes claims by risk score and SLA deadline, so that I work on the claims that matter most first.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given multiple claims are in the queue, when it is rendered, then claims are sorted by a combination of SLA due date and risk score, with high-risk/near-SLA claims surfaced first.</li>
+          <li>Given an examiner selects a claim, when they open it, then all relevant claim, member, and provider data is visible on a single screen without navigating to other systems.</li>
+        </ul>
+      </div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">C2</span><span class="story-priority must">Must</span></div>
+        <p class="story-text">As a <strong>Claims Examiner</strong>, I want to approve, deny, or escalate a claim with a documented rationale, so that every adjudication decision is defensible in an audit.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given an examiner makes a decision, when they submit it, then a rationale (free text or structured reason code) is required before the decision is finalized.</li>
+          <li>Given a decision is submitted, when it is recorded, then it is immutable and timestamped in the audit trail.</li>
+        </ul>
+      </div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">C3</span><span class="story-priority should">Should</span></div>
+        <p class="story-text">As a <strong>Claims Operations Manager</strong>, I want claims approaching SLA breach automatically escalated, so that no claim silently ages out of compliance.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given a claim is within 24 hours of its SLA deadline and unassigned or unresolved, when the SLA monitor runs, then the claim is automatically escalated to a supervisor queue.</li>
+          <li>Given a claim is escalated, when it is reassigned, then the original examiner and new examiner are both notified.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="epic-block">
+      <div class="epic-head"><span class="epic-id">Epic D</span><span class="epic-title">Audit Trail, Compliance &amp; Reporting</span></div>
+      <div class="epic-desc">Every automated and human decision is logged, sampled, and reportable without manual reconstruction.</div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">D1</span><span class="story-priority must">Must</span></div>
+        <p class="story-text">As a <strong>Compliance Auditor</strong>, I want a complete, immutable audit trail for every claim showing every automated and human touchpoint, so that I can respond to regulatory audits without reconstructing history manually.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given a claim moves through intake, scoring, review, and adjudication, when each step occurs, then it is logged with actor (system or user), timestamp, and action taken.</li>
+          <li>Given an auditor requests a claim's full history, when the audit trail is exported, then it includes every automated decision, model version used, and human override.</li>
+        </ul>
+      </div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">D2</span><span class="story-priority must">Must</span></div>
+        <p class="story-text">As a <strong>Compliance Auditor</strong>, I want configurable, risk-stratified audit sampling, so that we maintain oversight without auditing every claim manually.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given a defined sampling rate and stratification rule (e.g., by claim type, risk tier), when the sampling job runs, then it generates a representative sample for manual audit review.</li>
+          <li>Given a sampled claim is reviewed, when a discrepancy is found, then it is logged and rolled up into a monthly compliance report.</li>
+        </ul>
+      </div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">D3</span><span class="story-priority should">Should</span></div>
+        <p class="story-text">As a <strong>Product Manager</strong>, I want a real-time operational dashboard showing cycle time, error rate, and automation rate by claim type, so that I can monitor whether the initiative is hitting its target metrics without pulling manual reports.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given claims are processed, when the dashboard refreshes, then average cycle time, error/rework rate, and % of claims auto-validated are shown by claim type, updated at least daily.</li>
+          <li>Given a metric trends outside its target range for more than 3 consecutive days, when the dashboard detects it, then an alert is sent to the product and operations leads.</li>
+        </ul>
+      </div>
+
+      <div class="story-card">
+        <div class="story-head"><span class="story-id">D4</span><span class="story-priority could">Could</span></div>
+        <p class="story-text">As an <strong>Executive Sponsor</strong>, I want a monthly summary report translating operational metrics into cost savings and ROI, so that I can report initiative impact to leadership without needing raw data access.</p>
+        <div class="ac-label">Acceptance Criteria</div>
+        <ul class="ac-list">
+          <li>Given a calendar month closes, when the summary report generates, then it translates cycle-time and error-rate improvements into estimated cost savings using the agreed methodology.</li>
+          <li>Given the report is generated, when distributed, then it is delivered to defined stakeholders on a fixed monthly cadence.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="backlog-note">These 14 stories are drawn from the full backlog of 150+ used to run this initiative; the remainder followed the same epic structure across additional claim types, edge cases, and reporting variants.</p>
+  </section>
+
+  <section class="case-section" id="nfr">
+    <div class="section-label">08 · Non-Functional Requirements</div>
+    <h2>What has to be true regardless of feature</h2>
+    <table class="data-table">
+      <tr><th>Category</th><th>Requirement</th></tr>
+      <tr><td>Performance</td><td>RPA validation completes within 60 seconds of intake; risk scoring completes within 5 seconds per claim</td></tr>
+      <tr><td>Security</td><td>All PHI/PII encrypted in transit and at rest; role-based access control on every claim view and action</td></tr>
+      <tr><td>Compliance</td><td>Aligned to HIPAA, applicable CMS guidance, and state DOI requirements for claims handling and audit retention</td></tr>
+      <tr><td>Auditability</td><td>Every automated and human decision immutably logged with actor, timestamp, and model version where applicable</td></tr>
+      <tr><td>Explainability</td><td>Model risk flags must surface human-readable contributing factors, not raw feature weights, to reviewing examiners</td></tr>
+      <tr><td>Availability</td><td>Claims intake and review queue available during standard business hours with defined recovery time objective for outages</td></tr>
+    </table>
+  </section>
+
+  <section class="case-section" id="risks">
+    <div class="section-label">09 · Risks &amp; Assumptions</div>
+    <h2>What could go wrong, and the plan for it</h2>
+    <table class="data-table">
+      <tr><th>Risk</th><th>Mitigation</th></tr>
+      <tr><td>Model bias against protected classes goes undetected</td><td>Recurring automated fairness monitoring with a defined escalation path to an AI governance board before any model deployment</td></tr>
+      <tr><td>Examiner distrust of AI flags reduces adoption</td><td>Plain-language explainability on every flag, an override-with-feedback mechanism, and phased rollout with direct examiner input</td></tr>
+      <tr><td>RPA bots break on upstream source-system changes</td><td>Automated validation-gate monitoring with alerting on exception-rate spikes, tied to the same dashboard used for operational metrics</td></tr>
+      <tr><td>Audit sampling methodology is challenged externally</td><td>Sampling approach co-designed and signed off with Compliance and Legal before go-live, documented and versioned</td></tr>
+      <tr><td>Assumption: claim volume growth continues at historical rate</td><td>Capacity and model-retraining cadence reviewed quarterly against actual volume trends</td></tr>
+    </table>
+  </section>
+
+  <section class="case-section" id="rollout">
+    <div class="section-label">10 · Rollout Plan</div>
+    <h2>How this went from pilot to full scale</h2>
+    <table class="data-table">
+      <tr><th>Phase</th><th>Scope</th><th>Exit criteria</th></tr>
+      <tr><td>Phase 1 — Pilot</td><td>Single high-volume, low-complexity claim type; RPA validation + risk scoring in shadow mode (flagged but not yet routing)</td><td>Model precision/recall meets threshold in shadow mode; RPA exception rate below target</td></tr>
+      <tr><td>Phase 2 — Live routing</td><td>Risk-based routing goes live for the pilot claim type; audit sampling shifts to risk-stratified</td><td>Cycle-time and error-rate targets met for two consecutive months; zero critical audit findings</td></tr>
+      <tr><td>Phase 3 — Expansion</td><td>Extend to additional claim types; add examiner feedback loop into model retraining</td><td>Consistent metric performance across expanded claim types; sprint completion sustained ≥95%</td></tr>
+      <tr><td>Phase 4 — Steady state</td><td>Full operational dashboard, quarterly fairness review cadence, ongoing model retraining</td><td>Ongoing — ownership transitions to steady-state operations with quarterly business reviews</td></tr>
+    </table>
+    <div class="caveat">
+      <strong>Why phased, not big-bang:</strong> starting in shadow mode on one claim type let us validate model
+      quality and RPA reliability against real production data without any risk to live adjudication — the same
+      discipline of proving the riskiest assumption first that I apply across every initiative.
+    </div>
+  </section>
+</div>
+
+<div class="case-cta">
+  <h2>Want the full 150+ story backlog?</h2>
+  <p>Happy to walk through the complete epic breakdown, dependency mapping, or acceptance-criteria detail.</p>
+  <div class="cta-links">
+    <a href="mailto:addieokerinde@gmail.com" class="contact-link accent">✉ Get in touch</a>
+    <a href="../index.html#artifacts" class="contact-link light">← All artifacts</a>
+  </div>
+</div>
+
+<footer>
+  <span>© <span id="year"></span> Ade Okerinde</span>
+  <span>Product Manager · AI Product Owner · CSPO · CSM</span>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
